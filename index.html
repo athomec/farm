@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+	<title>農田水利署桃園管理處圖資平台</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="桃園農田水利會圖資平台,水利會圖資平台,圖資平台,桃園農田水利會">
+	<meta name="description" content="桃園農田水利會圖資平台" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta property="og:site_name" content="桃園農田水利會圖資平台" />
+	<meta property="og:image" content="assets/images/fb-img.png" />
+	<!--FB分享設定-->
+
+	<link rel="icon" href="assets/images/favicon.png" type="image/ico" />
+	<!--iconfont設定-->
+	<link rel="stylesheet" href="assets/style/all.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	<!--css設定-->
+</head>
+
+<body>
+	<!-- SCRIPTS -->
+	<script src="assets/js/jquery-3.3.1.min.js"></script>
+	<script src="assets/js/bootstrap.bundle.js"></script>
+	<script src="assets/js/script.js"></script>
+	<script src="assets/js/footable.js"></script>
+	<script src="assets/js/moment-with-locales.min.js"></script>
+	<script src="assets/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$('#export-from').datetimepicker({
+				locale: 'zh-tw',
+				defaultDate: new Date(),
+				icons: {
+					time: "bi bi-clock",
+					date: "bi bi-calendar",
+					up: "bi bi-arrow-up",
+					down: "bi bi-arrow-down",
+					previous: "bi bi-chevron-left",
+					next: "bi bi-chevron-right",
+					today: "bi bi-clock",
+					clear: "bi bi-trash3"
+				}
+			});
+			$('#export-to').datetimepicker({
+				locale: 'zh-tw',
+				defaultDate: new Date(),
+				icons: {
+					time: "bi bi-clock",
+					date: "bi bi-calendar",
+					up: "bi bi-arrow-up",
+					down: "bi bi-arrow-down",
+					previous: "bi bi-chevron-left",
+					next: "bi bi-chevron-right",
+					today: "bi bi-clock",
+					clear: "bi bi-trash3"
+				}
+			});
+		});
+		//iframe高度控制
+		function reinitIframe(item) {
+			var iframe = document.getElementById(item);
+			try {
+				var bHeight = iframe.contentWindow.document.body.scrollHeight;
+				var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+				var height = Math.max(bHeight, dHeight);
+				iframe.height = height;
+				console.log(height);
+			} catch (ex) { }
+		}
+	</script>
+	<div class="wrapper" data-bg="login">
+	<div class="container-fluid">
+		<div class="login row justify-content-center justify-content-lg-start">
+			<div class="col-lg-5">
+				<img src="./assets/images/logo-platform.svg" alt="桃園農田水利會圖資平台" class="login-brand">
+				<div class="row justify-content-center justify-content-lg-end">
+					<form class="col-11 col-md-8 col-lg-10 col-xxl-9">
+						<h1 class="login-title mb-3 mb-sm-4">登入<span class="ps-3">LOGIN</span></h1>
+						<div>
+							<label class="visually-hidden" for="account">帳號</label>
+							<input type="text" class="form-control form-control-lg" id="account" placeholder="請輸入帳號"
+								data-con="account">
+						</div>
+						<div class="mb-2 mb-lg-3">
+							<label class="visually-hidden" for="password">密碼</label>
+							<input type="text" class="form-control form-control-lg mb-1" id="password"
+								placeholder="請輸入密碼" data-con="password">
+						</div>
+						<div class="d-flex justify-content-between font-sm-md">
+							<div class="form-check">
+								<input class="form-check-input border-0" type="checkbox" value="" id="remember">
+								<label class="form-check-label white" for="remember">記住帳密</label>
+							</div>
+							<a href="#" class="d-flex align-items-center img-link white align-middle">
+								忘記密碼<img src="./assets/images/ic-question.svg" alt="忘記密碼icon" class="ps-2">
+							</a>
+						</div>
+						<div class="row align-items-end gx-3">
+							<div class="login-verify">
+								<label for="verification"
+									class="form-label d-flex align-items-center primary-dark-color flex-shrink-0"
+									style="width: 90px;">
+									<img src="./assets/images/ic-verify.svg" alt="驗證碼icon" class="me-1"
+										style="width: 24px;">驗證碼
+								</label>
+								<input type="text" class="form-control form-control-lg" id="verification" placeholder="請輸入驗證碼">
+								<div class="login-verify-img d-flex flex-shrink-0">
+									<img src="./assets/images/demo-code.png" alt="驗證碼">
+									<ul class="login-function ms-2 flex-shrink-0">
+										<li class="login-function-item mb-1">
+											<a href="#" title="重整" class="login-function-link link-img">
+												<img src="./assets/images/ic-reset.svg" alt="重整icon">
+											</a>
+										</li>
+										<li class="login-function-item">
+											<a href="#" title="語音" class="login-function-link link-img">
+												<img src="./assets/images/ic-voice.svg" alt="語音icon">
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="d-grid">
+							<button class="login-btn btn btn-dark-primary-color rounded py-2"
+								onclick="location.href='home.html';">SIGN IN</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="col-lg-7 d-flex justify-content-center mb-3 mb-md-0">
+				<img src="./assets/images/login-vision.svg" alt="農田水利署桃園管理處圖資平台" class="login-vision">
+			</div>
+			<img src="./assets/images/logo.svg" alt="行政院農業委員會農田水利署桃園管理處" class="login-bottom-logo">
+		</div>
+	</div>
+</div>
+</body>
+
+</html>

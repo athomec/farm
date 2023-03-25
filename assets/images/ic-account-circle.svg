@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <g id="ic-account-circle" transform="translate(-0.5)">
+    <g id="Group_7" data-name="Group 7">
+      <rect id="Rectangle_256" data-name="Rectangle 256" width="30" height="30" transform="translate(0.5)" fill="none"/>
+    </g>
+    <g id="Group_8" data-name="Group 8" transform="translate(2.5 2.5)">
+      <path id="Path_628" data-name="Path 628" d="M14.5,2A12.5,12.5,0,1,0,27,14.5,12.5,12.5,0,0,0,14.5,2Zm0,5a4.375,4.375,0,1,1-4.375,4.375A4.38,4.38,0,0,1,14.5,7Zm0,17.5a10.01,10.01,0,0,1-7.675-3.6,12.439,12.439,0,0,1,15.35,0A10.01,10.01,0,0,1,14.5,24.5Z" transform="translate(-2 -2)" fill="#6da95c"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,14 @@
+<svg id="ic-fact-check-light" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Group_65" data-name="Group 65">
+    <rect id="Rectangle_292" data-name="Rectangle 292" width="24" height="24" fill="none"/>
+  </g>
+  <g id="Group_67" data-name="Group 67">
+    <g id="Group_66" data-name="Group 66">
+      <path id="Path_688" data-name="Path 688" d="M20,3H4A2.006,2.006,0,0,0,2,5V19a2.006,2.006,0,0,0,2,2H20a2.006,2.006,0,0,0,2-2V5A2.006,2.006,0,0,0,20,3Zm0,16H4V5H20Z" fill="#fff" fill-rule="evenodd"/>
+      <path id="Path_689" data-name="Path 689" d="M19.41,10.42,17.99,9l-3.17,3.17-1.41-1.42L12,12.16,14.82,15Z" fill="#fff" fill-rule="evenodd"/>
+      <rect id="Rectangle_293" data-name="Rectangle 293" width="5" height="2" transform="translate(5 7)" fill="#fff"/>
+      <rect id="Rectangle_294" data-name="Rectangle 294" width="5" height="2" transform="translate(5 11)" fill="#fff"/>
+      <rect id="Rectangle_295" data-name="Rectangle 295" width="5" height="2" transform="translate(5 15)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

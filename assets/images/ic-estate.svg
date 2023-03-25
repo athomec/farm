@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ic-estate" opacity="0.7">
+    <g id="Group_62" data-name="Group 62">
+      <rect id="Rectangle_287" data-name="Rectangle 287" width="24" height="24" fill="none"/>
+    </g>
+    <g id="Group_64" data-name="Group 64">
+      <g id="Group_63" data-name="Group 63">
+        <rect id="Rectangle_288" data-name="Rectangle 288" width="2" height="7" transform="translate(5 10)" fill="#3c9bef"/>
+        <rect id="Rectangle_289" data-name="Rectangle 289" width="2" height="7" transform="translate(11 10)" fill="#3c9bef"/>
+        <path id="Path_684" data-name="Path 684" d="M22,6,12,1,2,6V8H22ZM6.47,6,12,3.24,17.53,6Z" fill="#3c9bef"/>
+        <path id="Path_685" data-name="Path 685" d="M2,19v2H14.4a7.846,7.846,0,0,1-.36-2Z" fill="#3c9bef"/>
+        <path id="Path_686" data-name="Path 686" d="M19,12.26V10H17v3.26Z" fill="#3c9bef"/>
+        <path id="Path_687" data-name="Path 687" d="M20,14l-4,2v2.55A5.638,5.638,0,0,0,20,24a5.638,5.638,0,0,0,4-5.45V16Zm-.72,7-2.03-2.03,1.06-1.06.97.97,2.41-2.38,1.06,1.06Z" fill="#3c9bef"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,11 @@
+<svg id="ic-search-off" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+  <g id="Group_25" data-name="Group 25">
+    <rect id="Rectangle_270" data-name="Rectangle 270" width="36" height="36" fill="none"/>
+  </g>
+  <g id="Group_27" data-name="Group 27" transform="translate(1.23 4.5)">
+    <g id="Group_26" data-name="Group 26">
+      <path id="Path_664" data-name="Path 664" d="M21.735,19.5H20.55l-.42-.405A9.742,9.742,0,1,0,3.03,12H6.06a6.734,6.734,0,1,1,6.675,7.5,6.349,6.349,0,0,1-.75-.075v3.03a6.289,6.289,0,0,0,.75.045,9.707,9.707,0,0,0,6.345-2.355l.405.42V21.75l7.5,7.485L29.22,27Z" transform="translate(0.285 -3)" fill="#9fb1c2"/>
+      <path id="Path_665" data-name="Path 665" d="M9.3,10.82l-3.7,3.7-3.705-3.7L.82,11.885l3.705,3.7L.82,19.295,1.885,20.36l3.705-3.7,3.7,3.7,1.065-1.065-3.7-3.7,3.7-3.7Z" transform="translate(-0.82 0.91)" fill="#9fb1c2"/>
+    </g>
+  </g>
+</svg>

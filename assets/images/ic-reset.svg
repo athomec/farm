@@ -1,0 +1,7 @@
+<svg id="ic-reset" xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
+  <rect id="Rectangle_195" data-name="Rectangle 195" width="21" height="21" rx="5" fill="#8dc87d"/>
+  <g id="loop_black_24dp" transform="translate(1.962 1.637)">
+    <path id="Path_93" data-name="Path 93" d="M0,0H17.586V17.586H0Z" fill="none"/>
+    <path id="Path_94" data-name="Path 94" d="M10.531,3.4V1L7.266,4.2l3.266,3.2V5a4.852,4.852,0,0,1,4.9,4.8,4.615,4.615,0,0,1-.571,2.238L16.05,13.2a6.243,6.243,0,0,0,1.012-3.405A6.462,6.462,0,0,0,10.531,3.4Zm0,11.191a4.852,4.852,0,0,1-4.9-4.8A4.615,4.615,0,0,1,6.2,7.555L5.012,6.388A6.243,6.243,0,0,0,4,9.793a6.462,6.462,0,0,0,6.531,6.395v2.4l3.266-3.2-3.266-3.2Z" transform="translate(-1.738 -1)" fill="#fff"/>
+  </g>
+</svg>
