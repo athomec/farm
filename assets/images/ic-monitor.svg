@@ -1,0 +1,13 @@
+<svg id="ic-monitor" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Group_376" data-name="Group 376">
+    <rect id="Rectangle_535" data-name="Rectangle 535" width="24" height="24" fill="none"/>
+  </g>
+  <g id="Group_378" data-name="Group 378">
+    <g id="Group_377" data-name="Group 377">
+      <path id="Path_1678" data-name="Path 1678" d="M4,19V10l6-4.5,4.08,3.06a7.787,7.787,0,0,1,2.61-.54L10,3,2,9V21h8.76a7.836,7.836,0,0,1-1.17-2Z" fill="#87adf9"/>
+      <path id="Path_1679" data-name="Path 1679" d="M17,14.75A1.25,1.25,0,0,0,15.75,16a1.2,1.2,0,0,0,.5.97V22h1.5V16.97a1.217,1.217,0,0,0,.5-.97A1.25,1.25,0,0,0,17,14.75Z" fill="#87adf9"/>
+      <path id="Path_1680" data-name="Path 1680" d="M17,12a4,4,0,0,0-2.83,6.83l1.06-1.06a2.505,2.505,0,1,1,3.54-.01l1.06,1.06A4,4,0,0,0,17,12Z" fill="#87adf9"/>
+      <path id="Path_1681" data-name="Path 1681" d="M17,9.5a6.505,6.505,0,0,0-4.6,11.1l1.06-1.06a5.01,5.01,0,1,1,7.08-.02l1.07,1.06A6.5,6.5,0,0,0,17,9.5Z" fill="#87adf9"/>
+    </g>
+  </g>
+</svg>

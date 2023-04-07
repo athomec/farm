@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+	<title>農田水利署桃園管理處圖資平台</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="桃園農田水利會圖資平台,水利會圖資平台,圖資平台,桃園農田水利會">
+	<meta name="description" content="桃園農田水利會圖資平台" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta property="og:site_name" content="桃園農田水利會圖資平台" />
+	<meta property="og:image" content="assets/images/fb-img.png" />
+	<!--FB分享設定-->
+
+	<link rel="icon" href="assets/images/favicon.png" type="image/ico" />
+	<!--iconfont設定-->
+	<link rel="stylesheet" href="assets/style/all.css">
+	<link rel="stylesheet"
+		href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	<!--css設定-->
+</head>
+
+<body class="scroll">
+	<!-- SCRIPTS -->
+	<script src="assets/js/jquery-3.3.1.min.js"></script>
+	<script src="assets/js/bootstrap.bundle.js"></script>
+	<script src="assets/js/script.js"></script>
+	<script src="assets/js/footable.js"></script>
+	<script src="assets/js/moment-with-locales.min.js"></script>
+	<script src="assets/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			//拖曳功能
+			$(".js-draggable").draggable();
+			//日期功能
+			var options = {
+				locale: 'zh-tw',
+				defaultDate: new Date(),
+				format: 'L',
+				icons: {
+					time: "bi bi-clock",
+					date: "bi bi-calendar",
+					up: "bi bi-arrow-up",
+					down: "bi bi-arrow-down",
+					previous: "bi bi-chevron-left",
+					next: "bi bi-chevron-right",
+					today: "bi bi-clock",
+					clear: "bi bi-trash3"
+				},
+				widgetPositioning: {
+					vertical: 'bottom',
+				}
+			};
+			$('#change-from, #change-to, #approved-from, #approved-to ,#edit-apply ,#edit-approved ,#edit-construction ,#edit-completed, #check-from, #check-to').datetimepicker(options);
+			//拉霸控制項
+			updateProgress();
+			function updateProgress() {
+				var rangeContainers = document.querySelectorAll('.range-group');
+				rangeContainers.forEach(function (container) {
+					var range = container.querySelector('.form-range');
+					var progress = container.querySelector('.progress-bar');
+					range.addEventListener('input', function () {
+						var value = this.value;
+						progress.style.width = value + '%';
+						progress.setAttribute('aria-valuenow', value);
+						progress.setAttribute('style', 'width: ' + value + '%;');
+					});
+				});
+			}
+		});
+		//iframe高度控制
+		function reinitIframe(item) {
+			var iframe = document.getElementById(item);
+			try {
+				var bHeight = iframe.contentWindow.document.body.scrollHeight;
+				var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+				var height = Math.max(bHeight, dHeight);
+				iframe.height = height;
+				console.log(height);
+			} catch (ex) { }
+		}
+	</script>
+	<script type="text/javascript">
+		$(".js-side-info-body").find('button').click(function () {
+			let linkTarget = $(this).attr("data-bs-target");
+			window.parent.$(linkTarget).modal("show");
+		});
+	</script>
+
+	<div class="modal-header border-0">
+    <h5 class="modal-title" id="exampleModalLabel"><img src="./assets/images/ic-both-modal.svg"> 兼作申請管理 資料編輯</h5>
+</div>
+<div class="modal-body px-4 py-0">
+    <div class="modal-tab-txt bg-tertiary-xlight-color bd-secondary-xdark-color border-top scroll mb-3" style="height:500px">
+        <div class="px-3 px-sm-4 px-md-5 py-4">
+            <div class="container-fluid px-0">
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <h6 class="modal-subtitle"><img src="./assets/images/ic-basic-info.svg" class="me-2"> 基本資料</h6>
+                        <div class="container-fluid px-0">
+                            <div class="row gx-3">
+                                <div class="col-lg-6 col-xl-4 mb-3">
+                                    <div class="modal-form-group">
+                                        <label for="edit-owner" class="me-2" style="width:110px">申請代表人</label>
+                                        <input class="form-control form-control-sm" type="text" id="edit-owner"
+                                            value="謝小名">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-xl-4 mb-3">
+                                    <div class="modal-form-group">
+                                        <label for="edit-id" class="me-2" style="width:110px">身分證字號</label>
+                                        <input class="form-control form-control-sm" type="text" id="edit-id"
+                                            value="B123456789">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-xl-4 mb-3">
+                                    <div class="modal-form-group">
+                                        <label for="edit-tel" class="me-2" style="width:110px">聯絡電話</label>
+                                        <input class="form-control form-control-sm" type="text" id="edit-tel"
+                                            value="0123456789">
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <div class="modal-form-group">
+                                        <label for="edit-add" class="me-2" style="width:110px">通訊地址</label>
+                                        <input class="form-control form-control-sm" type="text" id="edit-add"
+                                            value="臺中市豐原區陽明街36號 ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-xl-4 mb-3">
+                                    <div class="modal-form-group">
+                                        <label for="edit-apply" class="me-2" style="width:110px">申請日期</label>
+                                        <div class="form-group w-100">
+                                            <div class="input-group date" id="edit-apply" data-target-input="nearest">
+                                                <input type="text"
+                                                    class="form-control form-control-sm datetimepicker-input border-end-0"
+                                                    data-target="#approved-from">
+                                                <div class="input-group-append" data-target="#edit-apply"
+                                                    data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><img
+                                                            src="./assets/images/ic-calendar.svg"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-xl-4 mb-3">
+                                    <div class="modal-form-group">
+                                        <label for="edit-approved" class="me-2" style="width:110px">核准日期</label>
+                                        <div class="form-group w-100">
+                                            <div class="input-group date" id="edit-approved"
+                                                data-target-input="nearest">
+                                                <input type="text"
+                                                    class="form-control form-control-sm datetimepicker-input border-end-0"
+                                                    data-target="#approved-from">
+                                                <div class="input-group-append" data-target="#edit-approved"
+                                                    data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><img
+                                                            src="./assets/images/ic-calendar.svg"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-xl-4 mb-3">
+                                    <div class="modal-form-group w-100">
+                                        <label for="edit-expiry" class="me-2" style="width:110px">到期日</label>
+                                        <input class="form-control form-control-sm" type="text" id="edit-expiry"
+                                            value="2022-12-12" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-xl-4 mb-3">
+                                    <div class="modal-form-group">
+                                        <label for="edit-get-doc" class="me-2" style="width:110px">收件文號</label>
+                                        <input class="form-control form-control-sm" type="text" id="edit-get-doc"
+                                            value="B11204001">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-xl-4 mb-3">
+                                    <div class="modal-form-group">
+                                        <label for="edit-approved-doc" class="me-2" style="width:110px">核准文號</label>
+                                        <input class="form-control form-control-sm" type="text" id="edit-approved-doc"
+                                            value="B11204001">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-xl-4 mb-3">
+                                    <div class="modal-form-group">
+                                        <label for="edit-approved-area" class="me-2" style="width:110px">核准面積</label>
+                                        <input class="form-control form-control-sm" type="text" id="edit-approved-area"
+                                            value="10.8">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-xl-4 mb-3">
+                                    <div class="modal-form-group">
+                                        <label for="edit-construction" class="me-2" style="width:110px">實際施工日</label>
+                                        <div class="form-group w-100">
+                                            <div class="input-group date" id="edit-construction"
+                                                data-target-input="nearest">
+                                                <input type="text"
+                                                    class="form-control form-control-sm datetimepicker-input border-end-0"
+                                                    data-target="#approved-from">
+                                                <div class="input-group-append" data-target="#edit-construction"
+                                                    data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><img
+                                                            src="./assets/images/ic-calendar.svg"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-xl-4 mb-3">
+                                    <div class="modal-form-group">
+                                        <label for="edit-completed" class="me-2" style="width:110px">實際竣工日</label>
+                                        <div class="form-group w-100">
+                                            <div class="input-group date" id="edit-completed"
+                                                data-target-input="nearest">
+                                                <input type="text"
+                                                    class="form-control form-control-sm datetimepicker-input border-end-0"
+                                                    data-target="#approved-from">
+                                                <div class="input-group-append" data-target="#edit-completed"
+                                                    data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><img
+                                                            src="./assets/images/ic-calendar.svg"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-xl-4 mb-3">
+                                    <div class="modal-form-group">
+                                        <label for="edit-amount" class="me-2" style="width:110px">總核算金額</label>
+                                        <input class="form-control form-control-sm" type="text" id="edit-amount"
+                                            value="12,345,567,899">
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <div class="modal-form-group">
+                                        <label for="edit-ps" class="me-2" style="width:110px">備註</label>
+                                        <input class="form-control form-control-sm" type="text" id="edit-ps"
+                                            value="備註備註備註備註 ">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xl-3 mb-3">
+                                    <div class="modal-form-group">
+                                        <label for="apply-year" class="me-2" style="width: 110px;">年度</label>
+                                        <select class="form-select form-select-sm" id="apply-year">
+                                            <option selected="">請選擇</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xl-3 mb-3">
+                                    <div class="modal-form-group">
+                                        <label for="apply-station" class="me-2" style="width: 110px;">工作站</label>
+                                        <select class="form-select form-select-sm" id="apply-station">
+                                            <option selected="">請選擇</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xl-3 mb-3">
+                                    <div class="modal-form-group">
+                                        <label for="apply-representative" class="me-2"
+                                            style="width: 110px;">申請代表人</label>
+                                        <select class="form-select form-select-sm" id="apply-representative">
+                                            <option selected="">請選擇</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <h6 class="modal-subtitle"><img src="./assets/images/ic-edit-upload-file.svg" class="me-2"> 檔案上傳
+                        </h6>
+                        <div class="txt-list-wrapper bg-white p-3">
+                            <ul class="txt-list scroll mb-3">
+                                <li>檔案資料檔案資料檔案資料檔案資料.pdf</li>
+                                <li>檔案資料檔案資料檔案資料檔案資料.pdf</li>
+                                <li>檔案資料檔案資料檔案資料檔案資料.pdf</li>
+                                <li>檔案資料檔案資料檔案資料檔案資料.pdf</li>
+                                <li>檔案資料檔案資料檔案資料檔案資料.pdf</li>
+                                <li>檔案資料檔案資料檔案資料檔案資料.pdf</li>
+                            </ul>
+                            <button class="btn dashed-btn w-100">
+                                <img src="./assets/images/ic-add-file.svg" class="me-2"> 新增檔案
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <h6 class="modal-subtitle"><img src="./assets/images/ic-edit-upload-pic.svg" class="me-2"> 照片上傳
+                        </h6>
+                        <div class="txt-list-wrapper bg-white p-3">
+                            <ul class="img-list scroll">
+                                <li class="img-list-item">
+                                    <a href="#" class="img-list-link btn dashed-btn flex-column align-items-center">
+                                        <img src="./assets/images/ic-image-add.svg" style="width:40px">
+                                        新增照片
+                                    </a>
+                                </li>
+                                <li class="img-list-item">
+                                    <div class="img-list-pic">
+                                        <img src="./assets/images/demo-pic.jpg">
+                                        <button class="btn img-list-btn"><img src="./assets/images/ic-trash-red.svg"
+                                                alt="刪除"></button>
+                                    </div>
+                                </li>
+                                <li class="img-list-item">
+                                    <div class="img-list-pic">
+                                        <img src="./assets/images/demo-pic.jpg">
+                                        <button class="btn img-list-btn"><img src="./assets/images/ic-trash-red.svg"
+                                                alt="刪除"></button>
+                                    </div>
+                                </li>
+                                <li class="img-list-item">
+                                    <div class="img-list-pic">
+                                        <img src="./assets/images/demo-pic.jpg">
+                                        <button class="btn img-list-btn"><img src="./assets/images/ic-trash-red.svg"
+                                                alt="刪除"></button>
+                                    </div>
+                                </li>
+                                <li class="img-list-item">
+                                    <div class="img-list-pic">
+                                        <img src="./assets/images/demo-pic.jpg">
+                                        <button class="btn img-list-btn"><img src="./assets/images/ic-trash-red.svg"
+                                                alt="刪除"></button>
+                                    </div>
+                                </li>
+                                <li class="img-list-item">
+                                    <div class="img-list-pic">
+                                        <img src="./assets/images/demo-pic.jpg">
+                                        <button class="btn img-list-btn"><img src="./assets/images/ic-trash-red.svg"
+                                                alt="刪除"></button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-4">
+                        <h6 class="modal-subtitle border-0 mb-0"><img src="./assets/images/ic-jointname.svg"
+                                class="me-2"> 聯名申請人</h6>
+                        <table class="table table-modal mb-3 bg-white" data-header="no-sticky" data-toggle-column="last" id="side-info-table">
+                            <thead>
+                                <tr>
+                                    <th>姓名</th>
+                                    <th>身分證字號</th>
+                                    <th data-breakpoints="xs sm">聯絡電話</th>
+                                    <th data-breakpoints="xs sm md">通訊地址</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>謝小名</td>
+                                    <td>B123456789</td>
+                                    <td>0912345678</td>
+                                    <td class="text-start">臺中市豐原區陽明街36號陽明街36號 </td>
+                                    <td>
+                                        <a href="#" class="img-link d-inline-block">
+                                            <img src="./assets/images/ic-trash-red.svg" alt="刪除">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>謝小名</td>
+                                    <td>B123456789</td>
+                                    <td>0912345678</td>
+                                    <td class="text-start">臺中市豐原區陽明街36號陽明街36號 </td>
+                                    <td>
+                                        <a href="#" class="img-link d-inline-block">
+                                            <img src="./assets/images/ic-trash-red.svg" alt="刪除">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>謝小名</td>
+                                    <td>B123456789</td>
+                                    <td>0912345678</td>
+                                    <td class="text-start">臺中市豐原區陽明街36號陽明街36號 </td>
+                                    <td>
+                                        <a href="#" class="img-link d-inline-block">
+                                            <img src="./assets/images/ic-trash-red.svg" alt="刪除">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button class="btn dashed-btn btn-lg w-100">
+                            <img src="./assets/images/ic-add-person.svg" class="me-2"> 新增聯名申請人
+                        </button>
+                    </div>
+                    <div class="col-12">
+                        <h6 class="modal-subtitle border-0 mb-2">
+                            <img src="./assets/images/ic-position.svg" class="me-2"> 工程位置
+                            <button class="btn btn-dark-quaternary-light-color btn-sm ms-auto">
+                                <img src="./assets/images/ic-add.svg" class="me-1"> 新增工程位置
+                            </button>
+                        </h6>
+                        <div class="bg-white border-top border-5 bd-quaternary-light-color p-4">
+                            <div class="container px-0">
+                                <h4 class="modal-subsubtitle quaternary-light-color mb-2">
+                                    <img src="./assets/images/ic-info-circle.svg" class="me-1">基本資料
+                                </h4>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="building-number" class="me-2"
+                                                style="width:130px">水利建造物編號</label>
+                                            <input class="form-control form-control-sm" type="text" id="building-number"
+                                                value="20230302-104617-075 " disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="building-type" class="me-2" style="width:130px">建造物種類</label>
+                                            <input class="form-control form-control-sm" type="text" id="building-type"
+                                                value="架設橋涵-農舍,農業設施通行" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="route-name" class="me-2" style="width:130px">渠道名稱</label>
+                                            <input class="form-control form-control-sm" type="text" id="route-name"
+                                                value="7-2-2-031給排" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="route-code" class="me-2" style="width:130px">渠道代號</label>
+                                            <input class="form-control form-control-sm" type="text" id="route-code"
+                                                value="020701611120313" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="start-code" class="me-2" style="width:130px">起始樁號</label>
+                                            <input class="form-control form-control-sm" type="text" id="start-code"
+                                                value="0K+194">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="route-width" class="me-2" style="width:130px">渠道寬度</label>
+                                            <input class="form-control form-control-sm" type="text" id="route-width"
+                                                value="10">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="startx" class="me-2" style="width:130px">起始X座標</label>
+                                            <input class="form-control form-control-sm" type="text" id="startx"
+                                                value="121.187273040169" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="startY" class="me-2" style="width:130px">起始Y座標</label>
+                                            <input class="form-control form-control-sm" type="text" id="startY"
+                                                value="25.0130722255659" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="end-code" class="me-2" style="width:130px">終止樁號</label>
+                                            <input class="form-control form-control-sm" type="text" id="end-code"
+                                                value="0K+194">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="endx" class="me-2" style="width:130px">終止X座標</label>
+                                            <input class="form-control form-control-sm" type="text" id="endx"
+                                                value="121.187273040169" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="endY" class="me-2" style="width:130px;">終止Y座標</label>
+                                            <input class="form-control form-control-sm" type="text" id="endY"
+                                                value="25.0130617251894" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="building-length" class="me-2"
+                                                style="width:130px">水利建造物長度</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="6" disabled
+                                                    id="building-length">
+                                                <span class="input-group-text">公尺</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="building-area" class="me-2" style="width:130px">建造物面積</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="10" id="building-area">
+                                                <span class="input-group-text">平方公尺</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="work-design" class="me-2" style="width: 140px;">工程設計</label>
+                                            <select class="form-select form-select-sm" id="work-design">
+                                                <option selected="">委託水利會</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="edit-way" class="me-2" style="width: 140px;">辦理方式</label>
+                                            <select class="form-select form-select-sm" id="edit-way">
+                                                <option selected="">自行辦理</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="building-area" class="me-2" style="width:130px">核算金額</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="20,235,456"
+                                                    id="building-area">
+                                                <span class="input-group-text">元</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="modal-form-group">
+                                            <label for="edit-ps" class="me-2" style="width:130px;">備註</label>
+                                            <input class="form-control form-control-sm" type="text" id="edit-ps"
+                                                value="水利建造物使用地段">
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="modal-spline">
+                                <h4 class="modal-subsubtitle quaternary-light-color mb-2">
+                                    <img src="./assets/images/ic-pin-user.svg" class="me-1">水利建造物使用地段1-1（申請人）
+                                </h4>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="lot-type" class="me-2"
+                                                style="width:130px">地段類型</label>
+                                            <input class="form-control form-control-sm" type="text" id="lot-type"
+                                                value="渠道地號" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="county" class="me-2" style="width:130px">縣市</label>
+                                            <input class="form-control form-control-sm" type="text" id="county"
+                                                value="桃園市">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="township" class="me-2" style="width:130px">鄉鎮</label>
+                                            <input class="form-control form-control-sm" type="text" id="township"
+                                                value="中壢區">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="lot" class="me-2" style="width:130px">地段</label>
+                                            <input class="form-control form-control-sm" type="text" id="lot"
+                                                value="月眉" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="lot-code" class="me-2" style="width:130px">地段編號</label>
+                                            <input class="form-control form-control-sm" type="text" id="lot-code"
+                                                value="HB0301">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="land-number" class="me-2" style="width:130px">地號</label>
+                                            <input class="form-control form-control-sm" type="text" id="land-number"
+                                                value="585">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="present-value" class="me-2"
+                                                style="width:130px">公告現值</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="20,235,456"
+                                                    id="present-value">
+                                                <span class="input-group-text">元</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="ps-info" class="me-2" style="width:130px;">備註說明</label>
+                                            <input class="form-control form-control-sm" type="text" id="ps-info"
+                                                value="水利建造物使用地段">
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="modal-spline">
+                                <h4 class="modal-subsubtitle quaternary-light-color mb-2">
+                                    <img src="./assets/images/ic-pin-use.svg" class="me-1">水利建造物使用地段1-2（農田水利署）
+                                </h4>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="lot-code" class="me-2"
+                                                style="width: 130px;">地段類型</label>
+                                            <select class="form-select form-select-sm" id="lot-code">
+                                                <option selected="">渠道地號</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="use-county" class="me-2" style="width:130px">縣市</label>
+                                            <input class="form-control form-control-sm" type="text" id="use-county"
+                                                value="桃園市">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="use-township" class="me-2" style="width:130px">鄉鎮</label>
+                                            <input class="form-control form-control-sm" type="text" id="use-township"
+                                                value="中壢區">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="use-lot" class="me-2" style="width:130px">地段</label>
+                                            <input class="form-control form-control-sm" type="text" id="use-lot"
+                                                value="月眉">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="use-lot-code" class="me-2" style="width:130px">地段編號</label>
+                                            <input class="form-control form-control-sm" type="text" id="use-lot-code"
+                                                value="HB0301">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="use-land-number" class="me-2" style="width:130px">地號</label>
+                                            <input class="form-control form-control-sm" type="text" id="use-land-number"
+                                                value="585">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="use-present-value" class="me-2"
+                                                style="width:130px">公告現值</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="20,235,456"
+                                                    id="use-present-value">
+                                                <span class="input-group-text">元</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="modal-form-group">
+                                            <label for="use-ps-info" class="me-2" style="width:130px;">備註說明</label>
+                                            <input class="form-control form-control-sm" type="text" id="use-ps-info"
+                                                value="水利建造物使用地段">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center">
+        <button type="button" class="btn btn-dark-quaternary-light-color modal-tab-btn mb-3" data-bs-dismiss="modal" id="modal-edit-btn">儲存編輯</button>
+    </div>
+     <script>
+        $("#modal-edit-btn").click(function () {
+            window.parent.$("#edit").find('.btn-close').trigger("click");
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            //footable功能
+            $('.table-modal').footable({
+                "paging": {
+                    "enabled": true,
+                    "size": 15,
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

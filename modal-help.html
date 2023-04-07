@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+	<title>農田水利署桃園管理處圖資平台</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="桃園農田水利會圖資平台,水利會圖資平台,圖資平台,桃園農田水利會">
+	<meta name="description" content="桃園農田水利會圖資平台" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta property="og:site_name" content="桃園農田水利會圖資平台" />
+	<meta property="og:image" content="assets/images/fb-img.png" />
+	<!--FB分享設定-->
+
+	<link rel="icon" href="assets/images/favicon.png" type="image/ico" />
+	<!--iconfont設定-->
+	<link rel="stylesheet" href="assets/style/all.css">
+	<link rel="stylesheet"
+		href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	<!--css設定-->
+</head>
+
+<body class="scroll">
+	<!-- SCRIPTS -->
+	<script src="assets/js/jquery-3.3.1.min.js"></script>
+	<script src="assets/js/bootstrap.bundle.js"></script>
+	<script src="assets/js/script.js"></script>
+	<script src="assets/js/footable.js"></script>
+	<script src="assets/js/moment-with-locales.min.js"></script>
+	<script src="assets/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			//拖曳功能
+			$(".js-draggable").draggable();
+			//日期功能
+			var options = {
+				locale: 'zh-tw',
+				defaultDate: new Date(),
+				format: 'L',
+				icons: {
+					time: "bi bi-clock",
+					date: "bi bi-calendar",
+					up: "bi bi-arrow-up",
+					down: "bi bi-arrow-down",
+					previous: "bi bi-chevron-left",
+					next: "bi bi-chevron-right",
+					today: "bi bi-clock",
+					clear: "bi bi-trash3"
+				},
+				widgetPositioning: {
+					vertical: 'bottom',
+				}
+			};
+			$('#change-from, #change-to, #approved-from, #approved-to ,#edit-apply ,#edit-approved ,#edit-construction ,#edit-completed, #check-from, #check-to').datetimepicker(options);
+			//拉霸控制項
+			updateProgress();
+			function updateProgress() {
+				var rangeContainers = document.querySelectorAll('.range-group');
+				rangeContainers.forEach(function (container) {
+					var range = container.querySelector('.form-range');
+					var progress = container.querySelector('.progress-bar');
+					range.addEventListener('input', function () {
+						var value = this.value;
+						progress.style.width = value + '%';
+						progress.setAttribute('aria-valuenow', value);
+						progress.setAttribute('style', 'width: ' + value + '%;');
+					});
+				});
+			}
+		});
+		//iframe高度控制
+		function reinitIframe(item) {
+			var iframe = document.getElementById(item);
+			try {
+				var bHeight = iframe.contentWindow.document.body.scrollHeight;
+				var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+				var height = Math.max(bHeight, dHeight);
+				iframe.height = height;
+				console.log(height);
+			} catch (ex) { }
+		}
+	</script>
+	<script type="text/javascript">
+		$(".js-side-info-body").find('button').click(function () {
+			let linkTarget = $(this).attr("data-bs-target");
+			window.parent.$(linkTarget).modal("show");
+		});
+	</script>
+
+	<div class="modal-header border-0">
+    <h5 class="modal-title" id="exampleModalLabel"><img src="./assets/images/ic-help-circle.svg"> MyKML使用說明</h5>
+  </div>
+  <div class="modal-body px-4 py-0">
+      <nav>
+          <div class="modal-tabs nav nav-tabs scroll scrolly-none" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#mykml1" type="button" role="tab">上傳大小限制</button>
+            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#mykml2" type="button" role="tab">上傳格式限制</button>
+            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#mykml3" type="button" role="tab">新增KML/KMZ</button>
+            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#mykml4" type="button" role="tab">套疊KML/KMZ</button>
+            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#mykml5" type="button" role="tab">清除套疊KML/KMZ</button>
+            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#mykml6" type="button" role="tab">刪除KML/KMZ</button>
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active py-3" id="mykml1" role="tabpanel">
+              <h6 class="modal-tab-title secondary-dark-color mb-3">
+                  My KML上傳檔案大小限制說明<br>
+                  <span class="quaternary-color">注意：這些限制隨時可能發生變化</span>
+              </h6>
+              <div class="modal-tab-txt bg-tertiary-xlight-color scroll mb-3">
+                  <div class="px-4 px-md-5 py-4">
+                      <ul class="modal-tab-list">
+                          <li class="mb-3">原始KML，原始GeoRSS或壓縮KMZ：最大不超過3MB</li>
+                          <li class="mb-3">最大未壓縮的KML文件大小：最大不超過10MB</li>
+                          <li class="mb-3">網路連接的最大數量： 10筆</li>
+                          <li class="mb-3">文檔範圍內全部功能的最大數量：1000</li>
+                          <li class="mb-3">KML圖層的數量</li>
+                      </ul>
+可以在單個Google地圖上顯示的KML圖層數量有限制。 如果超出此限制，地圖上不會顯示任何圖層，並且會在Web瀏覽器的JavaScript控制台中報告錯誤。 該限制基於KmlLayer創建的類的數量和用於創建這些圖層的所有URL的總長度的組合。 每個新的KmlLayer 您創建的圖層將佔用圖層的一部分限制，並佔用限制的另一部分，具體取決於從中加載KML文件的URL的長度。 因此，您可以添加的圖層數量因應用程序而異。 平均而言，您應該能夠在不超出限制的情況下加載10到20層。 如果您仍然達到上限，請使用網址縮短工具縮短KML網址。 或者，創建一個由NetworkLinks組成的單個KML文件 到單獨的KML URL。
+                  </div>
+              </div>
+              <div class="d-flex flex-wrap justify-content-between">
+                  <a href="https://developers.google.com/maps/documentation/javascript/kmllayer?hl=zh-tw#restrictions" target="_blank" class="modal-tab-btn btn-border-secondary-dark-color btn-sm mb-2">
+                      <img src="./assets/images/ic-open-link.svg" class="me-2"> 詳見Google官方說明
+                  </a>
+                <button type="button" class="btn btn-dark-quaternary-light-color modal-tab-btn mb-2" data-bs-dismiss="modal" id="modal-help-btn">OK</button>
+              </div>
+          </div>
+          <div class="tab-pane fade py-3" id="mykml2" role="tabpanel">...</div>
+          <div class="tab-pane fade py-3" id="mykml3" role="tabpanel">...</div>
+          <div class="tab-pane fade py-3" id="mykml4" role="tabpanel">...</div>
+          <div class="tab-pane fade py-3" id="mykml5" role="tabpanel">...</div>
+          <div class="tab-pane fade py-3" id="mykml6" role="tabpanel">...</div>
+        </div>
+  </div>
+  <script>
+    $("#modal-help-btn").click(function () {
+		window.parent.$("#help").find('.btn-close').trigger("click");
+		window.parent.$('#uploadKMLBtn').trigger("click");
+    
+	});
+  
+</script>
+</body>
+
+</html>

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+	<title>農田水利署桃園管理處圖資平台</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="桃園農田水利會圖資平台,水利會圖資平台,圖資平台,桃園農田水利會">
+	<meta name="description" content="桃園農田水利會圖資平台" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta property="og:site_name" content="桃園農田水利會圖資平台" />
+	<meta property="og:image" content="assets/images/fb-img.png" />
+	<!--FB分享設定-->
+
+	<link rel="icon" href="assets/images/favicon.png" type="image/ico" />
+	<!--iconfont設定-->
+	<link rel="stylesheet" href="assets/style/all.css">
+	<link rel="stylesheet"
+		href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	<!--css設定-->
+</head>
+
+<body class="scroll">
+	<!-- SCRIPTS -->
+	<script src="assets/js/jquery-3.3.1.min.js"></script>
+	<script src="assets/js/bootstrap.bundle.js"></script>
+	<script src="assets/js/script.js"></script>
+	<script src="assets/js/footable.js"></script>
+	<script src="assets/js/moment-with-locales.min.js"></script>
+	<script src="assets/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			//拖曳功能
+			$(".js-draggable").draggable();
+			//日期功能
+			var options = {
+				locale: 'zh-tw',
+				defaultDate: new Date(),
+				format: 'L',
+				icons: {
+					time: "bi bi-clock",
+					date: "bi bi-calendar",
+					up: "bi bi-arrow-up",
+					down: "bi bi-arrow-down",
+					previous: "bi bi-chevron-left",
+					next: "bi bi-chevron-right",
+					today: "bi bi-clock",
+					clear: "bi bi-trash3"
+				},
+				widgetPositioning: {
+					vertical: 'bottom',
+				}
+			};
+			$('#change-from, #change-to, #approved-from, #approved-to ,#edit-apply ,#edit-approved ,#edit-construction ,#edit-completed, #check-from, #check-to').datetimepicker(options);
+			//拉霸控制項
+			updateProgress();
+			function updateProgress() {
+				var rangeContainers = document.querySelectorAll('.range-group');
+				rangeContainers.forEach(function (container) {
+					var range = container.querySelector('.form-range');
+					var progress = container.querySelector('.progress-bar');
+					range.addEventListener('input', function () {
+						var value = this.value;
+						progress.style.width = value + '%';
+						progress.setAttribute('aria-valuenow', value);
+						progress.setAttribute('style', 'width: ' + value + '%;');
+					});
+				});
+			}
+		});
+		//iframe高度控制
+		function reinitIframe(item) {
+			var iframe = document.getElementById(item);
+			try {
+				var bHeight = iframe.contentWindow.document.body.scrollHeight;
+				var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+				var height = Math.max(bHeight, dHeight);
+				iframe.height = height;
+				console.log(height);
+			} catch (ex) { }
+		}
+	</script>
+	<script type="text/javascript">
+		$(".js-side-info-body").find('button').click(function () {
+			let linkTarget = $(this).attr("data-bs-target");
+			window.parent.$(linkTarget).modal("show");
+		});
+	</script>
+
+	<script>
+    $(function () {
+        $("body").addClass("bg-backstage");
+    })
+</script>
+<header>
+    <nav class="navbar navbar-expand-lg fixed-top bg-secondary-color" data-con="backstage">
+        <div class="container-fluid px-0 justify-content-start">
+            <a class="navbar-brand d-flex white ps-2 ps-md-3" href="index.html">
+                <img src="./assets/images/logo-backstage.svg" alt="農田水利署桃園管理處圖資後台">
+            </a>
+            <button class="navbar-toggler border-0 px-1 ms-auto" type="button" data-bs-toggle="collapse"
+                data-bs-target="#backstage-menu">
+                <img src="./assets/images/ic-bar-white.svg" alt="選單">
+            </button>
+            <div class="collapse navbar-collapse ms-auto flex-grow-0" id="backstage-menu">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" title="帳號管理">
+                            <img src="./assets/images/ic-account-manage.svg" alt="帳號管理">
+                            <p>帳號管理</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="檔案下載管理">
+                            <img src="./assets/images/ic-download-manage.svg" alt="檔案下載管理">
+                            <p>檔案下載管理</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="灌溉地普查功能管理">
+                            <img src="./assets/images/ic-land-check-manage.svg" alt="灌溉地普查功能管理">
+                            <p>灌溉地普查功能管理</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="意見回饋管理">
+                            <img src="./assets/images/ic-opinion-manage.svg" alt="意見回饋管理">
+                            <p>意見回饋管理</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <button class="nav-close-btn btn btn-dark-secondary-dark-color" type="button">
+                <img src="./assets/images/ic-close-lg.svg" alt="選單">
+            </button>
+        </div>
+    </nav>
+</header>
+
+<!-----內容開始----->
+<div class="container backstage">
+    <div class="backstage-header">
+        <h2 class="backstage-title">
+            <img src="./assets/images/ic-account-manage-title.svg" class="me-2"> 帳號管理
+        </h2>
+        <div class="d-flex flex-wrap ms-auto mb-0">
+            <div class="input-group btn-input-group me-2 mb-2 mb-xl-0" style="max-width: 255px;height: 32px;">
+                <input type="text" class="form-control bd-quaternary-color bg-white" placeholder="關鍵字搜尋">
+                <button class="btn bd-quaternary-color bg-white py-1" type="button">
+                    <img src="./assets/images/ic-search-green.svg" alt="搜尋">
+                </button>
+            </div>
+            <div class="position-relative">
+                <button class="btn btn-dark-quaternary-light-color btn-sm me-2 mb-2" data-bs-toggle="collapse"
+                    data-bs-target="#filter">
+                    <img src="./assets/images/ic-filter.svg" class="me-1"> 篩選
+                </button>
+                <div class="collapse" id="filter">
+                    <div class="card-body bg-tertiary-xlight-color shadow-sm">
+                        <div class="mb-3">
+                            <label for="work-station" class="form-label">工作站</label>
+                            <select class="form-select form-select-sm" id="work-station">
+                                <option selected="">請選擇</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="right" class="form-label">權限</label>
+                            <select class="form-select form-select-sm" id="right">
+                                <option selected="">請選擇</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="enable" class="form-label">是否啟用</label>
+                            <select class="form-select form-select-sm" id="enable">
+                                <option selected="">請選擇</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-dark-secondary-color btn-sm me-2 mb-2">
+                <img src="./assets/images/ic-add.svg" class="me-1"> 新增
+            </button>
+            <button class="circle-btn btn-dark-secondary-color mb-2"><img src="./assets/images/ic-reset-white.svg"
+                    alt="重整"></button>
+        </div>
+    </div>
+
+
+    <div class="side-info-content">
+        <table class="table table-backstage mb-0" data-toggle-column="last" data-header="no-sticky">
+            <thead>
+                <tr>
+                    <th>帳號</th>
+                    <th>使用者名稱</th>
+                    <th data-breakpoints="xs sm">部門</th>
+                    <th data-breakpoints="xs">權限</th>
+                    <th data-breakpoints="xs sm md">是否啟用</th>
+                    <th data-breakpoints="xs">更新日期</th>
+                    <th>檢視</th>
+                    <th>編輯</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>a051</td>
+                    <td>王曉明</td>
+                    <td>資訊室</td>
+                    <td>本會會員</td>
+                    <td>false</td>
+                    <td>2023-02-03 14:39</td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-detail.svg" alt="詳細資料">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="img-link d-inline-block">
+                            <img src="./assets/images/ic-edit.svg" alt="編輯">
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="paging-txt secondary-dark-color">顯示第 1 至 15 項結果，共 350 項</p>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        //footable功能
+        $('.table-backstage').footable({
+            "paging": {
+                "enabled": true,
+                "size": 14,
+            }
+        });
+    });
+</script>
+</body>
+
+</html>

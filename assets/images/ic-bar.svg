@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <g id="ic-bar" transform="translate(-4231 -3872)">
+    <rect id="Rectangle_659" data-name="Rectangle 659" width="30" height="30" transform="translate(4231 3872)" fill="none"/>
+    <g id="menu" transform="translate(4236 3821.975)">
+      <g id="grip-solid-horizontal_1_" transform="translate(0 58.025)">
+        <path id="Path_1900" data-name="Path 1900" d="M18.75,350.654H1.25a1.25,1.25,0,1,1,0-2.5h17.5a1.25,1.25,0,1,1,0,2.5Z" transform="translate(0 -335.654)" fill="#87adf9"/>
+        <path id="Path_1901" data-name="Path 1901" d="M18.75,205.59H1.25a1.25,1.25,0,1,1,0-2.5h17.5a1.25,1.25,0,1,1,0,2.5Z" transform="translate(0 -196.84)" fill="#87adf9"/>
+        <path id="Path_1902" data-name="Path 1902" d="M18.75,60.525H1.25a1.25,1.25,0,0,1,0-2.5h17.5a1.25,1.25,0,1,1,0,2.5Z" transform="translate(0 -58.025)" fill="#87adf9"/>
+      </g>
+    </g>
+  </g>
+</svg>

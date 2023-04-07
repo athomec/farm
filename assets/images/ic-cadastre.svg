@@ -1,0 +1,14 @@
+<svg id="ic-cadastre" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Group_397" data-name="Group 397">
+    <path id="Path_1705" data-name="Path 1705" d="M0,0H24V24H0Z" fill="none"/>
+  </g>
+  <g id="Group_399" data-name="Group 399">
+    <g id="Group_398" data-name="Group 398">
+      <rect id="Rectangle_556" data-name="Rectangle 556" width="2" height="2" transform="translate(17 7)" fill="#87adf9"/>
+      <rect id="Rectangle_557" data-name="Rectangle 557" width="2" height="2" transform="translate(17 11)" fill="#87adf9"/>
+      <rect id="Rectangle_558" data-name="Rectangle 558" width="2" height="2" transform="translate(17 15)" fill="#87adf9"/>
+      <path id="Path_1706" data-name="Path 1706" d="M1,11V21H7V16H9v5h6V11L8,6Zm12,8H11V14H5v5H3V12L8,8.5,13,12Z" fill="#87adf9"/>
+      <path id="Path_1707" data-name="Path 1707" d="M10,3V4.97L12,6.4V5h9V19H17v2h6V3Z" fill="#87adf9"/>
+    </g>
+  </g>
+</svg>

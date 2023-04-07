@@ -1,0 +1,15 @@
+<svg id="ic-lot" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Group_560" data-name="Group 560">
+    <rect id="Rectangle_636" data-name="Rectangle 636" width="24" height="24" fill="none"/>
+  </g>
+  <g id="Group_562" data-name="Group 562">
+    <g id="Group_561" data-name="Group 561">
+      <path id="Path_1862" data-name="Path 1862" d="M18,4H16v7.9l2-2Z" fill="#87adf9"/>
+      <rect id="Rectangle_637" data-name="Rectangle 637" width="2" height="16" transform="translate(4 4)" fill="#87adf9"/>
+      <rect id="Rectangle_638" data-name="Rectangle 638" width="2" height="4" transform="translate(10 4)" fill="#87adf9"/>
+      <rect id="Rectangle_639" data-name="Rectangle 639" width="2" height="4" transform="translate(10 10)" fill="#87adf9"/>
+      <rect id="Rectangle_640" data-name="Rectangle 640" width="2" height="4" transform="translate(10 16)" fill="#87adf9"/>
+      <path id="Path_1863" data-name="Path 1863" d="M22.56,12.59l-1.15-1.15a1.491,1.491,0,0,0-2.12,0L14,16.73V20h3.27l5.29-5.29A1.491,1.491,0,0,0,22.56,12.59Zm-5.98,5.86H15.55V17.42L19,13.97,20.03,15Z" fill="#87adf9"/>
+    </g>
+  </g>
+</svg>

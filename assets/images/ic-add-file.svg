@@ -1,0 +1,14 @@
+<svg id="ic-add-file" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Group_478" data-name="Group 478">
+    <rect id="Rectangle_604" data-name="Rectangle 604" width="24" height="24" fill="none"/>
+  </g>
+  <g id="Group_480" data-name="Group 480">
+    <g id="Group_479" data-name="Group 479">
+      <path id="Path_1783" data-name="Path 1783" d="M17,19.22H5V7h7V5H5A2.006,2.006,0,0,0,3,7V19a2.006,2.006,0,0,0,2,2H17a2.006,2.006,0,0,0,2-2V12H17Z" fill="#8cc63f"/>
+      <path id="Path_1784" data-name="Path 1784" d="M19,2H17V5H14c.01.01,0,2,0,2h3V9.99c.01.01,2,0,2,0V7h3V5H19Z" fill="#8cc63f"/>
+      <rect id="Rectangle_605" data-name="Rectangle 605" width="8" height="2" transform="translate(7 9)" fill="#8cc63f"/>
+      <path id="Path_1785" data-name="Path 1785" d="M7,12v2h8V12H7Z" fill="#8cc63f"/>
+      <rect id="Rectangle_606" data-name="Rectangle 606" width="8" height="2" transform="translate(7 15)" fill="#8cc63f"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,5 @@
+<svg id="ic-tool-pin-active" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <path id="Path_1875" data-name="Path 1875" d="M0,0H20V20H0Z" fill="none"/>
+  <path id="Path_1876" data-name="Path 1876" d="M10.833,2A5.829,5.829,0,0,0,5,7.833c0,4.375,5.833,10.833,5.833,10.833s5.833-6.458,5.833-10.833A5.829,5.829,0,0,0,10.833,2ZM6.667,7.833a4.167,4.167,0,1,1,8.333,0c0,2.4-2.4,5.992-4.167,8.233C9.1,13.842,6.667,10.208,6.667,7.833Z" transform="translate(-0.833 -0.333)" fill="#8cc63f"/>
+  <circle id="Ellipse_37" data-name="Ellipse 37" cx="2.083" cy="2.083" r="2.083" transform="translate(7.917 5.417)" fill="#8cc63f"/>
+</svg>

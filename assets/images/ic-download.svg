@@ -1,4 +1,10 @@
-<svg id="ic-download" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
-  <path id="Path_690" data-name="Path 690" d="M0,0H28V28H0Z" fill="none"/>
-  <path id="Path_691" data-name="Path 691" d="M21.737,13.54v8.2H5.342v-8.2H3v8.2a2.349,2.349,0,0,0,2.342,2.342H21.737a2.349,2.349,0,0,0,2.342-2.342v-8.2Zm-7.026.785L17.744,11.3l1.651,1.651L13.54,18.809,7.684,12.954,9.335,11.3l3.033,3.021V3h2.342Z" transform="translate(0.46 0.46)" fill="#8dc87d"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <g id="ic-download" transform="translate(-0.421 -0.409)">
+    <g id="Group_262" data-name="Group 262" transform="translate(0.421 0.409)">
+      <rect id="Rectangle_405" data-name="Rectangle 405" width="30" height="30" transform="translate(0 0)" fill="none"/>
+    </g>
+    <g id="Group_263" data-name="Group 263" transform="translate(5.384 4.431)">
+      <path id="Path_1540" data-name="Path 1540" d="M21.485,17.738v3.747H6.5V17.738H4v3.747a2.505,2.505,0,0,0,2.5,2.5H21.485a2.505,2.505,0,0,0,2.5-2.5V17.738Zm-1.249-5-1.761-1.761L15.24,14.2V4h-2.5V14.2L9.508,10.981,7.747,12.742l6.245,6.245Z" transform="translate(-4 -4)" fill="#87adf9"/>
+    </g>
+  </g>
 </svg>

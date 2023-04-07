@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+	<title>農田水利署桃園管理處圖資平台</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="桃園農田水利會圖資平台,水利會圖資平台,圖資平台,桃園農田水利會">
+	<meta name="description" content="桃園農田水利會圖資平台" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta property="og:site_name" content="桃園農田水利會圖資平台" />
+	<meta property="og:image" content="assets/images/fb-img.png" />
+	<!--FB分享設定-->
+
+	<link rel="icon" href="assets/images/favicon.png" type="image/ico" />
+	<!--iconfont設定-->
+	<link rel="stylesheet" href="assets/style/all.css">
+	<link rel="stylesheet"
+		href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	<!--css設定-->
+</head>
+
+<body class="scroll">
+	<!-- SCRIPTS -->
+	<script src="assets/js/jquery-3.3.1.min.js"></script>
+	<script src="assets/js/bootstrap.bundle.js"></script>
+	<script src="assets/js/script.js"></script>
+	<script src="assets/js/footable.js"></script>
+	<script src="assets/js/moment-with-locales.min.js"></script>
+	<script src="assets/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			//拖曳功能
+			$(".js-draggable").draggable();
+			//日期功能
+			var options = {
+				locale: 'zh-tw',
+				defaultDate: new Date(),
+				format: 'L',
+				icons: {
+					time: "bi bi-clock",
+					date: "bi bi-calendar",
+					up: "bi bi-arrow-up",
+					down: "bi bi-arrow-down",
+					previous: "bi bi-chevron-left",
+					next: "bi bi-chevron-right",
+					today: "bi bi-clock",
+					clear: "bi bi-trash3"
+				},
+				widgetPositioning: {
+					vertical: 'bottom',
+				}
+			};
+			$('#change-from, #change-to, #approved-from, #approved-to ,#edit-apply ,#edit-approved ,#edit-construction ,#edit-completed, #check-from, #check-to').datetimepicker(options);
+			//拉霸控制項
+			updateProgress();
+			function updateProgress() {
+				var rangeContainers = document.querySelectorAll('.range-group');
+				rangeContainers.forEach(function (container) {
+					var range = container.querySelector('.form-range');
+					var progress = container.querySelector('.progress-bar');
+					range.addEventListener('input', function () {
+						var value = this.value;
+						progress.style.width = value + '%';
+						progress.setAttribute('aria-valuenow', value);
+						progress.setAttribute('style', 'width: ' + value + '%;');
+					});
+				});
+			}
+		});
+		//iframe高度控制
+		function reinitIframe(item) {
+			var iframe = document.getElementById(item);
+			try {
+				var bHeight = iframe.contentWindow.document.body.scrollHeight;
+				var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+				var height = Math.max(bHeight, dHeight);
+				iframe.height = height;
+				console.log(height);
+			} catch (ex) { }
+		}
+	</script>
+	<script type="text/javascript">
+		$(".js-side-info-body").find('button').click(function () {
+			let linkTarget = $(this).attr("data-bs-target");
+			window.parent.$(linkTarget).modal("show");
+		});
+	</script>
+
+	<button class="btn btn-primary side-info-toggle rounded-0 js-side-info-toggler" type="button" data-bs-toggle="collapse"
+    data-bs-target="#member-land-content">
+    <p class="side-info-title"><img src="./assets/images/ic-both.svg" class="me-2"> 兼作申請管理</p>
+    <img src="./assets/images/ic-circle-down-blue.svg" alt="伸縮">
+</button>
+<div class="side-info-content-wrapper collapse show" id="member-land-content">
+    <div class="card-body scroll h-100">
+        <h5 class="side-info-subtitle">資料篩選
+            <button class="btn btn-dark-quaternary-light-color btn-sm ms-auto"
+                onclick="location.href='side-info-apply-manage-list.html';">
+                <img src="./assets/images/ic-search-list.svg"> 查詢</button>
+        </h5>
+        <div class="side-info-content container">
+            <div class="row gx-3">
+                <div class="col-lg-6 col-xl-5 mb-3">
+                    <div class="form-group">
+                        <label for="apply-keywords" class="me-2" style="width: 85px;">關鍵字搜尋</label>
+                        <input class="form-control form-control-sm" type="text" id="apply-keywords"
+                            placeholder="請輸入關鍵字">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xl-5 mb-3">
+                    <div class="form-group w-100">
+                        <label for="change-from" class="me-2" style="width: 85px;">核准日期</label>
+                        <div class="input-group date" id="approved-from" data-target-input="nearest">
+                            <input type="text" class="form-control form-control-sm datetimepicker-input border-end-0"
+                                data-target="#approved-from">
+                            <div class="input-group-append" data-target="#approved-from" data-toggle="datetimepicker">
+                                <div class="input-group-text"><img src="./assets/images/ic-calendar.svg"></div>
+                            </div>
+                        </div>
+
+                        <label for="change-to" class="mx-md-2 mb-1 mb-md-0">至</label>
+                        <div class="input-group date" id="approved-to" data-target-input="nearest">
+                            <input type="text" class="form-control form-control-sm datetimepicker-input border-end-0"
+                                data-target=" #approved-to">
+                            <div class="input-group-append" data-target="#approved-to" data-toggle="datetimepicker">
+                                <div class="input-group-text"><img src="./assets/images/ic-calendar.svg"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3 mb-3">
+                    <div class="form-group">
+                        <label for="apply-year" class="me-2" style="width: 85px;">年度</label>
+                        <select class="form-select form-select-sm" id="apply-year">
+                            <option selected="">請選擇</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3 mb-3">
+                    <div class="form-group">
+                        <label for="apply-station" class="me-2" style="width: 85px;">工作站</label>
+                        <select class="form-select form-select-sm" id="apply-station">
+                            <option selected="">請選擇</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3 mb-3">
+                    <div class="form-group">
+                        <label for="apply-representative" class="me-2" style="width: 85px;">申請代表人</label>
+                        <select class="form-select form-select-sm" id="apply-representative">
+                            <option selected="">請選擇</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

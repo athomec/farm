@@ -1,0 +1,14 @@
+<svg id="ic-edit-upload-file" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+  <g id="Group_478" data-name="Group 478">
+    <rect id="Rectangle_604" data-name="Rectangle 604" width="28" height="28" fill="none"/>
+  </g>
+  <g id="Group_480" data-name="Group 480" transform="translate(3.5 2.333)">
+    <g id="Group_479" data-name="Group 479">
+      <path id="Path_1783" data-name="Path 1783" d="M19.333,21.59h-14V7.333H13.5V5H5.333A2.34,2.34,0,0,0,3,7.333v14a2.34,2.34,0,0,0,2.333,2.333h14a2.34,2.34,0,0,0,2.333-2.333V13.167H19.333Z" transform="translate(-3 -1.5)" fill="#6595f6"/>
+      <path id="Path_1784" data-name="Path 1784" d="M19.833,2H17.5V5.5H14c.012.012,0,2.333,0,2.333h3.5v3.488c.012.012,2.333,0,2.333,0V7.833h3.5V5.5h-3.5Z" transform="translate(-1.167 -2)" fill="#6595f6"/>
+      <rect id="Rectangle_605" data-name="Rectangle 605" width="10" height="3" transform="translate(4.5 7.667)" fill="#6595f6"/>
+      <path id="Path_1785" data-name="Path 1785" d="M7,12v2.333h9.333V12H7Z" transform="translate(-2.333 -0.333)" fill="#6595f6"/>
+      <rect id="Rectangle_606" data-name="Rectangle 606" width="10" height="3" transform="translate(4.5 14.667)" fill="#6595f6"/>
+    </g>
+  </g>
+</svg>

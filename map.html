@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+	<title>農田水利署桃園管理處圖資平台</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="桃園農田水利會圖資平台,水利會圖資平台,圖資平台,桃園農田水利會">
+	<meta name="description" content="桃園農田水利會圖資平台" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta property="og:site_name" content="桃園農田水利會圖資平台" />
+	<meta property="og:image" content="assets/images/fb-img.png" />
+	<!--FB分享設定-->
+
+	<link rel="icon" href="assets/images/favicon.png" type="image/ico" />
+	<!--iconfont設定-->
+	<link rel="stylesheet" href="assets/style/all.css">
+	<link rel="stylesheet"
+		href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	<!--css設定-->
+</head>
+
+<body class="scroll">
+	<!-- SCRIPTS -->
+	<script src="assets/js/jquery-3.3.1.min.js"></script>
+	<script src="assets/js/bootstrap.bundle.js"></script>
+	<script src="assets/js/script.js"></script>
+	<script src="assets/js/footable.js"></script>
+	<script src="assets/js/moment-with-locales.min.js"></script>
+	<script src="assets/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			//拖曳功能
+			$(".js-draggable").draggable();
+			//日期功能
+			var options = {
+				locale: 'zh-tw',
+				defaultDate: new Date(),
+				format: 'L',
+				icons: {
+					time: "bi bi-clock",
+					date: "bi bi-calendar",
+					up: "bi bi-arrow-up",
+					down: "bi bi-arrow-down",
+					previous: "bi bi-chevron-left",
+					next: "bi bi-chevron-right",
+					today: "bi bi-clock",
+					clear: "bi bi-trash3"
+				},
+				widgetPositioning: {
+					vertical: 'bottom',
+				}
+			};
+			$('#change-from, #change-to, #approved-from, #approved-to ,#edit-apply ,#edit-approved ,#edit-construction ,#edit-completed, #check-from, #check-to').datetimepicker(options);
+			//拉霸控制項
+			updateProgress();
+			function updateProgress() {
+				var rangeContainers = document.querySelectorAll('.range-group');
+				rangeContainers.forEach(function (container) {
+					var range = container.querySelector('.form-range');
+					var progress = container.querySelector('.progress-bar');
+					range.addEventListener('input', function () {
+						var value = this.value;
+						progress.style.width = value + '%';
+						progress.setAttribute('aria-valuenow', value);
+						progress.setAttribute('style', 'width: ' + value + '%;');
+					});
+				});
+			}
+		});
+		//iframe高度控制
+		function reinitIframe(item) {
+			var iframe = document.getElementById(item);
+			try {
+				var bHeight = iframe.contentWindow.document.body.scrollHeight;
+				var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+				var height = Math.max(bHeight, dHeight);
+				iframe.height = height;
+				console.log(height);
+			} catch (ex) { }
+		}
+	</script>
+	<script type="text/javascript">
+		$(".js-side-info-body").find('button').click(function () {
+			let linkTarget = $(this).attr("data-bs-target");
+			window.parent.$(linkTarget).modal("show");
+		});
+	</script>
+
+	<!--MyKML使用說明視窗開始-->
+<div class="modal fade" id="help" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <button type="button" class="btn-close" data-bs-dismiss="modal">
+                <img src="./assets/images/ic-close-blue.svg" alt="close">
+            </button>
+            <iframe src="modal-help.html" frameborder="0" scrolling="no" id="modalHelp"
+                onload="this.height=100"></iframe>
+            <script type="text/javascript">
+                window.setInterval("reinitIframe('modalHelp')", 200);
+            </script>
+        </div>
+    </div>
+</div>
+<!--MyKML使用說明視窗結束-->
+<!--編輯視窗開始-->
+<button data-bs-toggle="modal" data-bs-target="#edit" id="edit-toggler" class="d-none">打開編輯視窗</button>
+<div class="modal fade" id="edit" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <button type="button" class="btn-close" data-bs-dismiss="modal">
+                <img src="./assets/images/ic-close-blue.svg" alt="close">
+            </button>
+            <iframe src="modal-edit.html" frameborder="0" scrolling="no" id="modalEdit" onload="this.height=100">
+            </iframe>
+            <script type="text/javascript">
+                window.setInterval("reinitIframe('modalEdit')", 200);
+            </script>
+        </div>
+    </div>
+</div>
+<!--編輯視窗結束-->
+<!--上傳視窗開始-->
+<button data-bs-toggle="modal" data-bs-target="#upload" id="upload-toggler" class="d-none">水工構造物批次上傳圖片管理</button>
+<div class="modal fade" id="upload" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <button type="button" class="btn-close" data-bs-dismiss="modal">
+                <img src="./assets/images/ic-close-blue.svg" alt="close">
+            </button>
+            <iframe src="modal-upload.html" frameborder="0" scrolling="no" id="modalUpload" onload="this.height=100">
+            </iframe>
+            <script type="text/javascript">
+                window.setInterval("reinitIframe('modalUpload')", 200);
+            </script>
+        </div>
+    </div>
+</div>
+<!--上傳視窗結束-->
+<header>
+    <nav class="navbar navbar-expand-xl fixed-top bg-white">
+        <div class="container-fluid px-0 justify-content-start">
+            <a class="navbar-brand d-flex white ps-2 ps-md-3" href="index.html">
+                <img src="./assets/images/logo-platform.svg" alt="農田水利署桃園管理處圖資平台">
+            </a>
+            <button class="navbar-toggler border-0 px-1 ms-auto js-side-menu-toggler" type="button"
+                data-target="#side-menu">
+                <img src="./assets/images/ic-bar.svg" alt="選單"> 選單
+            </button>
+            <button class="navbar-toggler border-0 px-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#top-menu">
+                <img src="./assets/images/ic-tools.svg" alt="工具"> 工具
+            </button>
+            <button class="navbar-toggler border-0 px-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#member-menu">
+                <img src="./assets/images/ic-user-menu.svg" alt="會員"> 會員
+            </button>
+
+            <div class="collapse navbar-collapse ms-auto flex-grow-0" id="top-menu" data-bs-parent=".navbar">
+                <ul class="navbar-nav">
+                    <li class="me-2">
+                        <div class="input-group btn-input-group mb-2 mb-xl-0">
+                            <input type="text" class="form-control bd-tertiary-color bg-tertiary-xlight-color"
+                                placeholder="關鍵字搜尋" aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button class="btn bd-tertiary-color bg-tertiary-xlight-color py-1" type="button"
+                                id="button-addon2">
+                                <img src="./assets/images/ic-search.svg" alt="搜尋">
+                            </button>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" title="水路方向">
+                            <img src="./assets/images/ic-route.svg" alt="水路方向">
+                            <p>水路方向</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="數化工具">
+                            <img src="./assets/images/ic-tool.svg" alt="數化工具">
+                            <p>數化工具</p>
+                        </a>
+                        <!--ic-tool開頭的圖片即工具icon切圖-->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="地圖比對">
+                            <img src="./assets/images/ic-check.svg" alt="地圖比對">
+                            <p>地圖比對</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="全台範圍">
+                            <img src="./assets/images/ic-taiwan.svg" alt="全台範圍">
+                            <p>全台範圍</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="回到桃園">
+                            <img src="./assets/images/ic-tia.svg" alt="回到桃園">
+                            <p>回到桃園</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="清除圖示">
+                            <img src="./assets/images/ic-clear.svg" alt="清除圖示">
+                            <p>清除圖示</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="測量功能">
+                            <img src="./assets/images/ic-measure.svg" alt="測量功能">
+                            <p>測量功能</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="地圖出圖">
+                            <img src="./assets/images/ic-image.svg" alt="地圖出圖">
+                            <p>地圖出圖</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="檔案下載">
+                            <img src="./assets/images/ic-download.svg" alt="檔案下載">
+                            <p>檔案下載</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="collapse navbar-collapse flex-grow-0" id="member-menu" data-bs-parent=".navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <button class="btn nav-link border-0" title="會員資料" role="button" data-style="dark"
+                            data-bs-toggle="collapse" href="#member">
+                            <img src="./assets/images/ic-user.svg" alt="會員資料">
+                            <p>會員資料</p>
+                        </button>
+                        <div class="collapse nav-dropdown" id="member">
+                            <h2 class="nav-dropdown-title">member 您好</h2>
+                            <div class="bg-secondary-dark-color white">
+                                <ul class="nav-dropdown-info">
+                                    <li><img src="./assets/images/ic-user-name.svg" alt="會員名稱" class="me-2">
+                                        <p>名稱名稱名稱</p>
+                                    </li>
+                                    <li><img src="./assets/images/ic-mail.svg" alt="會員信箱" class="me-2">
+                                        <p>emmawu@geoforce.com.tw</p>
+                                    </li>
+                                    <li><img src="./assets/images/ic-unit.svg" alt="會員科室" class="me-2">
+                                        <p>測試科室</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <ul class="nav-dropdown-list">
+                                <li>
+                                    <a href="#" class="btn-dark-secondary-xdark-color"><img
+                                            src="./assets/images/ic-opinion.svg" alt="意見回饋" class="me-2"> 意見回饋</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn-dark-secondary-xdark-color"><img
+                                            src="./assets/images/ic-manage.svg" alt="後臺管理" class="me-2"> 後臺管理</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn-dark-secondary-xdark-color"><img
+                                            src="./assets/images/ic-password-reset.svg" alt="密碼修改" class="me-2">
+                                        密碼修改</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item js-tag-button border-0">
+                        <a class="nav-link" href="#" title="登出" data-style="dark">
+                            <img src="./assets/images/ic-logout.svg" alt="登出">
+                            <p>登出</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+</header>
+
+<!-----側邊選單開始----->
+<div class="d-flex">
+    <div class="side-menu js-side-menu" id="side-menu">
+        <button class="btn side-menu-toggler js-side-menu-toggler d-none d-md-flex" type="button">
+            <img src="./assets/images/ic-chevron-left.svg" alt="導引列表icon">
+        </button>
+        <div class="side-menu-body scroll">
+            <div class="accordion" id="accordionGroup">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                            <img src="./assets/images/ic-layer.svg" alt="圖層清單icon" class="me-2 me-md-3"> 圖層清單
+                            <img src="./assets/images/ic-down-arrow.svg" class="accordion-icon">
+                        </button>
+                    </h2>
+                    <div id="collapse1" class="accordion-collapse collapse" data-bs-parent="#accordionGroup">
+                        <div class="accordion-body">
+                            <div class="d-flex">
+                                <div class="input-group btn-input-group mb-3">
+                                    <input type="text"
+                                        class="form-control form-control-sm bd-tertiary-color bg-tertiary-xlight-color"
+                                        placeholder="搜尋圖層">
+                                    <button class="btn btn-sm bd-tertiary-color bg-tertiary-xlight-color px-2 py-1"
+                                        type="button" id="button-addon2">
+                                        <img src="./assets/images/ic-search.svg" alt="搜尋">
+                                    </button>
+                                </div>
+                                <a href="#" class="btn circle-btn btn-dark-secondary-color p-0 ms-auto"
+                                    title="清除圖層"><img src="./assets/images/ic-unsupported.svg" alt=""></a>
+                            </div>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse1-1">
+                                文字文字文字文字
+                            </button>
+                            <div id="collapse1-1" class="accordion-collapse collapse bg-quaternary-xlight-color"
+                                data-bs-parent="#collapse1">
+                                <button class="accordion-button accordion-subsub collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapse1-1-1">
+                                    文字文字文字
+                                </button>
+                                <div id="collapse1-1-1" class="accordion-collapse collapse"
+                                    data-bs-parent="#collapse1-1">
+                                    <div class="pb-2">
+                                        <div class="form-check mb-1">
+                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                            <label class="form-check-label" for="defaultCheck1">
+                                                灌區地籍(110)
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-1">
+                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                            <label class="form-check-label" for="defaultCheck2">
+                                                縣市界(110)
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                                            <label class="form-check-label" for="defaultCheck3">
+                                                鄉鎮市區界(110)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse1-2">
+                                文字文字文字文字
+                            </button>
+                            <div id="collapse1-2" class="accordion-collapse collapse bg-quaternary-xlight-color"
+                                data-bs-parent="#collapse1">
+                                <button class="accordion-button accordion-subsub collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapse1-2-1">
+                                    文字文字文字
+                                </button>
+                                <div id="collapse1-2-1" class="accordion-collapse collapse pt-1"
+                                    data-bs-parent="#collapse1-2">
+                                    <div class="pb-2">
+                                        <div class="form-check mb-1">
+                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                            <label class="form-check-label" for="defaultCheck4">
+                                                灌區地籍(110)
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-1">
+                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
+                                            <label class="form-check-label" for="defaultCheck5">
+                                                縣市界(110)
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-1">
+                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck6">
+                                            <label class="form-check-label" for="defaultCheck6">
+                                                鄉鎮市區界(110)
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-1">
+                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck7">
+                                            <label class="form-check-label" for="defaultCheck7">
+                                                村里界(110)
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck8">
+                                            <label class="form-check-label" for="defaultCheck8">
+                                                地段
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                            <img src="./assets/images/ic-locate.svg" alt="定位功能icon" class="me-2 me-md-3"> 定位功能
+                            <img src="./assets/images/ic-down-arrow.svg" class="accordion-icon">
+                        </button>
+                    </h2>
+                    <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#accordionGroup">
+                        <div class="accordion-body">
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse2-1" data-icon="single-icon">
+                                <img src="./assets/images/ic-pin.svg" alt="座標定位"> 座標定位
+                            </button>
+                            <div id="collapse2-1" class="accordion-collapse collapse bg-quaternary-xlight-color"
+                                data-bs-parent="#collapse2">
+                                <div class="p-4 pt-3">
+                                    <label for="station" class="form-label">工作站</label>
+                                    <select class="form-select mb-3" id="station">
+                                        <option selected>請選擇</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <label for="team1" class="form-label">小組</label>
+                                    <select class="form-select mb-3" id="team1">
+                                        <option selected>請選擇</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <label for="team2" class="form-label">小組</label>
+                                    <select class="form-select mb-3" id="team2">
+                                        <option selected>請選擇</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <label for="team3" class="form-label">小組</label>
+                                    <select class="form-select mb-3" id="team3">
+                                        <option selected>請選擇</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <button class="btn btn-dark-quaternary-light-color w-100 mb-3">定位</button>
+                                    <h3 class="accordion-body-title">小組</h3>
+                                    <label for="team-number" class="form-label">樁號</label>
+                                    <input class="form-control mb-3" type="text" placeholder="例0K+300" id="team-number">
+                                    <button class="btn btn-dark-quaternary-light-color w-100">定位</button>
+                                </div>
+                            </div>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse2-2" data-icon="single-icon">
+                                <img src="./assets/images/ic-building.svg" alt="行政區定位"> 行政區定位
+                            </button>
+                            <div id="collapse2-2" class="accordion-collapse collapse bg-quaternary-xlight-color"
+                                data-bs-parent="#collapse2">
+                                <div class="p-4 pt-3">
+                                    <label for="station" class="form-label">工作站</label>
+                                    <select class="form-select mb-3" id="station">
+                                        <option selected>請選擇</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <label for="team1" class="form-label">小組</label>
+                                    <select class="form-select mb-3" id="team1">
+                                        <option selected>請選擇</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <label for="team2" class="form-label">小組</label>
+                                    <select class="form-select mb-3" id="team2">
+                                        <option selected>請選擇</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <label for="team3" class="form-label">小組</label>
+                                    <select class="form-select mb-3" id="team3">
+                                        <option selected>請選擇</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <button class="btn btn-dark-quaternary-light-color w-100 mb-3">定位</button>
+                                    <h3 class="accordion-body-title">小組</h3>
+                                    <label for="team-number" class="form-label">樁號</label>
+                                    <input class="form-control mb-3" type="text" placeholder="例0K+300" id="team-number">
+                                    <button class="btn btn-dark-quaternary-light-color w-100">定位</button>
+                                </div>
+                            </div>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse2-3" data-icon="single-icon">
+                                <img src="./assets/images/ic-lot.svg" alt="地段定位"> 地段定位
+                            </button>
+                            <div id="collapse2-3" class="accordion-collapse collapse bg-quaternary-xlight-color"
+                                data-bs-parent="#collapse2">
+                                <div class="p-4 pt-3">
+                                    <label for="station" class="form-label">地段定位</label>
+                                    <select class="form-select mb-3" id="station">
+                                        <option selected>請選擇</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <label for="team1" class="form-label">小組</label>
+                                    <select class="form-select mb-3" id="team1">
+                                        <option selected>請選擇</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <label for="team2" class="form-label">小組</label>
+                                    <select class="form-select mb-3" id="team2">
+                                        <option selected>請選擇</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <label for="team3" class="form-label">小組</label>
+                                    <select class="form-select mb-3" id="team3">
+                                        <option selected>請選擇</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <button class="btn btn-dark-quaternary-light-color w-100 mb-3">定位</button>
+                                    <h3 class="accordion-body-title">小組</h3>
+                                    <label for="team-number" class="form-label">樁號</label>
+                                    <input class="form-control mb-3" type="text" placeholder="例0K+300" id="team-number">
+                                    <button class="btn btn-dark-quaternary-light-color w-100">定位</button>
+                                </div>
+                            </div>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse2-4" data-icon="single-icon">
+                                <img src="./assets/images/ic-cadastre.svg" alt="地籍定位"> 地籍定位
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse2-5" data-icon="single-icon">
+                                <img src="./assets/images/ic-batch.svg" alt="批次定位"> 批次定位
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse2-6" data-icon="single-icon">
+                                <img src="./assets/images/ic-round.svg" alt="輪區定位"> 輪區定位
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse2-7" data-icon="single-icon">
+                                <img src="./assets/images/ic-pool.svg" alt="池塘定位"> 池塘定位
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse2-8" data-icon="single-icon">
+                                <img src="./assets/images/ic-river.svg" alt="水權定位"> 水權定位
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse2-9" data-icon="single-icon">
+                                <img src="./assets/images/ic-way.svg" alt="渠道樁號定位"> 渠道樁號定位
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                            <img src="./assets/images/ic-heart.svg" alt="我的最愛" class="me-2 me-md-3"> 我的最愛
+                            <img src="./assets/images/ic-down-arrow.svg" class="accordion-icon">
+                        </button>
+                    </h2>
+                    <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionGroup">
+                        <div class="accordion-body">
+                            <div class="pb-2">
+                                <div class="form-check mb-1 d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <input class="form-check-input" type="checkbox" value="" id="like1">
+                                        <label class="form-check-label" for="like1">
+                                            灌區地籍(110)
+                                        </label>
+                                    </div>
+                                    <button class="btn img-link"><img src="./assets/images/ic-trash.svg"
+                                            alt="刪除"></button>
+                                </div>
+                                <div class="form-check mb-1 d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <input class="form-check-input" type="checkbox" value="" id="like2">
+                                        <label class="form-check-label" for="like2">
+                                            縣市界(110)
+                                        </label>
+                                    </div>
+                                    <button class="btn img-link"><img src="./assets/images/ic-trash.svg"
+                                            alt="刪除"></button>
+                                </div>
+                                <div class="form-check d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <input class="form-check-input" type="checkbox" value="" id="like3">
+                                        <label class="form-check-label" for="like3">
+                                            鄉鎮市區界(110)
+                                        </label>
+                                    </div>
+                                    <button class="btn img-link"><img src="./assets/images/ic-trash.svg"
+                                            alt="刪除"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                            <img src="./assets/images/ic-history.svg" alt="歷史圖層" class="me-2 me-md-3"> 歷史圖層
+                            <img src="./assets/images/ic-down-arrow.svg" class="accordion-icon">
+                        </button>
+                    </h2>
+                    <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#accordionGroup">
+                        <div class="accordion-body">
+                            <div class="pb-2">
+                                <div class="range-group mb-3">
+                                    <label for="disabledRange" class="form-label mb-1">工作站管轄範圍(110)</label>
+                                    <div class="d-flex">
+                                        <img src="./assets/images/ic-range.svg" alt="工作站管轄範圍">
+                                        <p class="range-number quaternary-color px-2">55%</p>
+                                        <div class="progress w-100">
+                                            <div class="progress-bar" role="progressbar" style="width: 0%;"
+                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <input type="range" class="form-range" min="0" max="100" value="0"
+                                                onchange="updateProgress()">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="range-group mb-3">
+                                    <label for="disabledRange" class="form-label mb-1">工作站管轄範圍(110)</label>
+                                    <div class="d-flex">
+                                        <img src="./assets/images/ic-range.svg" alt="工作站管轄範圍">
+                                        <p class="range-number quaternary-color px-2">100%</p>
+                                        <div class="progress w-100">
+                                            <div class="progress-bar" role="progressbar" style="width: 0%;"
+                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <input type="range" class="form-range" min="0" max="100" value="0"
+                                                onchange="updateProgress()">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="range-group">
+                                    <label for="disabledRange" class="form-label mb-1">工作站管轄範圍(110)</label>
+                                    <div class="d-flex">
+                                        <img src="./assets/images/ic-range.svg" alt="工作站管轄範圍">
+                                        <p class="range-number quaternary-color px-2">80%</p>
+                                        <div class="progress w-100">
+                                            <div class="progress-bar" role="progressbar" style="width: 0%;"
+                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <input type="range" class="form-range" min="0" max="100" value="0"
+                                                onchange="updateProgress()">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                            <img src="./assets/images/ic-farmer.svg" alt="受灌農戶" class="me-2 me-md-3"> 受灌農戶
+                            <img src="./assets/images/ic-down-arrow.svg" class="accordion-icon">
+                        </button>
+                    </h2>
+                    <div id="collapse5" class="accordion-collapse collapse" data-bs-parent="#accordionGroup">
+                        <div class="accordion-body">
+                            <button class="accordion-button accordion-sub collapsed js-btn-all-info" type="button"
+                                data-icon="single-icon" data-target="#all-info" onclick="window.open('side-info-member-land.html', 'allInfo')">
+                                <img src="./assets/images/ic-member.svg" alt="會員土地資料"> 會員土地資料
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-icon="single-icon">
+                                <img src="./assets/images/ic-cadastre.svg" alt="土地資料"> 土地資料
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse6">
+                            <img src="./assets/images/ic-drop.svg" alt="灌溉管理" class="me-2 me-md-3"> 灌溉管理
+                            <img src="./assets/images/ic-down-arrow.svg" class="accordion-icon">
+                        </button>
+                    </h2>
+                    <div id="collapse6" class="accordion-collapse collapse" data-bs-parent="#accordionGroup">
+                        <div class="accordion-body">
+                            <button class="accordion-button accordion-sub collapsed js-btn-all-info" type="button"
+                                data-icon="single-icon" data-target="#all-info" onclick="window.open('side-info-apply-manage.html', 'allInfo')">
+                                <img src="./assets/images/ic-both.svg" alt="兼作申請管理"> 兼作申請管理
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed js-btn-all-info" type="button"
+                                data-icon="single-icon" data-target="#all-info" onclick="window.open('side-info-water-structure.html', 'allInfo')">
+                                <img src="./assets/images/ic-structure.svg" alt="水工構造物"> 水工構造物
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-icon="single-icon">
+                                <img src="./assets/images/ic-monitor.svg" alt="水質監測點"> 水質監測點
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-icon="single-icon">
+                                <img src="./assets/images/ic-pool-manage.svg" alt="池塘管理"> 池塘管理
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-icon="single-icon">
+                                <img src="./assets/images/ic-water-right.svg" alt="水權管理"> 水權管理
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-icon="single-icon">
+                                <img src="./assets/images/ic-waste.svg" alt="廢水廢溜管理"> 廢水廢溜管理
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-icon="single-icon">
+                                <img src="./assets/images/ic-statistics.svg" alt="灌溉統計"> 灌溉統計
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse7">
+                            <img src="./assets/images/ic-work.svg" alt="工務管理" class="me-2 me-md-3"> 工務管理
+                            <img src="./assets/images/ic-down-arrow.svg" class="accordion-icon">
+                        </button>
+                    </h2>
+                    <div id="collapse7" class="accordion-collapse collapse" data-bs-parent="#accordionGroup">
+                        <div class="accordion-body">
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-icon="single-icon">
+                                <img src="./assets/images/ic-more-worker.svg" alt="緊急雇工"> 緊急雇工
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-icon="single-icon">
+                                <img src="./assets/images/ic-work-manage.svg" alt="工務管理"> 工務管理
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse8">
+                            <img src="./assets/images/ic-irrigated.svg" alt="灌地普查" class="me-2 me-md-3"> 灌地普查
+                            <img src="./assets/images/ic-down-arrow.svg" class="accordion-icon">
+                        </button>
+                    </h2>
+                    <div id="collapse8" class="accordion-collapse collapse" data-bs-parent="#accordionGroup">
+                        <div class="accordion-body">
+                            <button class="accordion-button accordion-sub collapsed js-btn-all-info" type="button"
+                                data-icon="single-icon" data-target="#all-info" onclick="window.open('side-info-land-check.html', 'allInfo')">
+                                <img src="./assets/images/ic-irrigated-search.svg" alt="灌溉地普查"> 灌溉地普查
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-icon="single-icon">
+                                <img src="./assets/images/ic-irrigated-statistics.svg" alt="灌溉地普查統計"> 灌溉地普查統計
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse9">
+                            <img src="./assets/images/ic-land.svg" alt="土地改良物" class="me-2 me-md-3"> 土地改良物
+                            <img src="./assets/images/ic-down-arrow.svg" class="accordion-icon">
+                        </button>
+                        <div id="collapse9" class="accordion-collapse collapse" data-bs-parent="#accordionGroup">
+                            <div class="accordion-body">
+                                <button class="accordion-button accordion-sub collapsed" type="button"
+                                    data-icon="single-icon">
+                                    <img src="./assets/images/ic-irrigated-search.svg" alt="灌溉地普查"> XXXX
+                                </button>
+                                <button class="accordion-button accordion-sub collapsed" type="button"
+                                    data-icon="single-icon">
+                                    <img src="./assets/images/ic-irrigated-statistics.svg" alt="灌溉地普查統計"> XXXX
+                                </button>
+                            </div>
+                        </div>
+                    </h2>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse10">
+                            <img src="./assets/images/ic-file.svg" alt="MyKML" class="me-2 me-md-3"> MyKML
+                            <img src="./assets/images/ic-down-arrow.svg" class="accordion-icon">
+                        </button>
+                    </h2>
+                    <div id="collapse10" class="accordion-collapse collapse" data-bs-parent="#accordionGroup">
+                        <div class="accordion-body">
+                            <div class="pb-2">
+                                <div class="d-flex">
+                                    <div class="me-2 flex-shrink-1 w-100">
+                                        <button class="btn collapsed w-100 btn-upload" data-bs-toggle="collapse"
+                                            data-bs-target="#uploadKML" data-con="上傳檔案" id="uploadKMLBtn">
+                                        </button>
+                                        <div id="uploadKML"
+                                            class="accordion-collapse collapse bg-quaternary-xlight-color">
+                                            <div class="p-3">
+                                                <div class="d-flex mb-2 align-items-start justify-content-between">
+                                                    <p class="flex-shrink-1">灌區地籍灌區地籍.kml</p>
+                                                    <button class="btn img-link p-0 flex-shrink-0"><img
+                                                            src="./assets/images/ic-return.svg" alt="重整"></button>
+                                                </div>
+                                                <button class="btn-dark-quaternary-light-color w-100"> 上傳檔案
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <a href="#" class="btn circle-btn btn-dark-secondary-color p-0 flex-shrink-0"
+                                        title="?" data-bs-toggle="modal" data-bs-target="#help">
+                                        <img src="./assets/images/ic-help.svg" alt="info">
+                                    </a>
+                                </div>
+                                <hr class="my-3 bg-tertiary-color">
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" value="" id="mykml1">
+                                    <label class="form-check-label" for="mykml1">
+                                        灌區地籍(110)
+                                    </label>
+                                </div>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" value="" id="mykml2">
+                                    <label class="form-check-label" for="mykml2">
+                                        縣市界(110)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="mykml3">
+                                    <label class="form-check-label" for="mykml3">
+                                        鄉鎮市區界(110)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse11">
+                            <img src="./assets/images/ic-openkml.svg" alt="OpenKML" class="me-2 me-md-3"> OpenKML
+                            <img src="./assets/images/ic-down-arrow.svg" class="accordion-icon">
+                        </button>
+                    </h2>
+                    <div id="collapse11" class="accordion-collapse collapse" data-bs-parent="#accordionGroup">
+                        <div class="accordion-body">
+                            <div class="pb-2">
+                                <div class="d-flex">
+                                    <button class="btn btn-dark-quaternary-light-color w-100 me-2"><img
+                                            src="./assets/images/ic-upload.svg" class="me-1"> 上傳檔案</button>
+                                    <a href="#" class="btn circle-btn btn-dark-secondary-color p-0 flex-shrink-0"
+                                        title="清除圖層">
+                                        <img src="./assets/images/ic-unsupported.svg" alt="">
+                                    </a>
+                                </div>
+                                <hr class="my-3 bg-tertiary-color">
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" value="" id="mykml1">
+                                    <label class="form-check-label" for="mykml1">
+                                        灌區地籍(110)
+                                    </label>
+                                </div>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" value="" id="mykml2">
+                                    <label class="form-check-label" for="mykml2">
+                                        縣市界(110)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="mykml3">
+                                    <label class="form-check-label" for="mykml3">
+                                        鄉鎮市區界(110)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse12">
+                            <img src="./assets/images/ic-inspection.svg" alt="外業巡查" class="me-2 me-md-3"> 外業巡查
+                            <img src="./assets/images/ic-down-arrow.svg" class="accordion-icon">
+                        </button>
+                    </h2>
+                    <div id="collapse12" class="accordion-collapse collapse" data-bs-parent="#accordionGroup">
+                        <div class="accordion-body">
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-icon="single-icon">
+                                <img src="./assets/images/ic-zoom.svg" alt="水閘門"> 水閘門
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-icon="single-icon">
+                                <img src="./assets/images/ic-zoom.svg" alt="河水堰"> 河水堰
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-icon="single-icon">
+                                <img src="./assets/images/ic-zoom.svg" alt="倒伏堰"> 倒伏堰
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-icon="single-icon">
+                                <img src="./assets/images/ic-zoom.svg" alt="橡皮壩"> 橡皮壩
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-icon="single-icon">
+                                <img src="./assets/images/ic-zoom.svg" alt="渠道"> 渠道
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-icon="single-icon">
+                                <img src="./assets/images/ic-zoom.svg" alt="引水狀況"> 引水狀況
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-icon="single-icon">
+                                <img src="./assets/images/ic-zoom.svg" alt="妨礙水利"> 妨礙水利
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-icon="single-icon">
+                                <img src="./assets/images/ic-zoom.svg" alt="緊急災害"> 緊急災害
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-icon="single-icon">
+                                <img src="./assets/images/ic-zoom.svg" alt="緊急雇工"> 緊急雇工
+                            </button>
+                            <button class="accordion-button accordion-sub collapsed" type="button"
+                                data-icon="single-icon">
+                                <img src="./assets/images/ic-zoom.svg" alt="工程測量"> 工程測量
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-----側邊選單結束----->
+    <!-----主要內容開始----->
+    <div class="side-content js-side-content">
+        <!-----地圖開始----->
+        <div class="map-content js-map-content"
+            style="background: url('assets/images/map-demo.jpg'); background-size: cover;">
+            <div class="toast-container js-draggable" style="width: 190px; left: 100px;top: 100px;">
+                <div class="toast fade show" role="alert">
+                    <div class="toast-header bg-secondary-color py-1">
+                        <button type="button" class="btn-close btn-close-white ms-auto"
+                            data-bs-dismiss="toast"></button>
+                    </div>
+                    <div class="toast-body p-0">
+                        <ul class="map-menu">
+                            <li class="map-menu-item"><a href="#" class="map-menu-link"><img
+                                        src="./assets/images/ic-copy-locate.svg"> 複製此處座標</a></li>
+                            <li class="map-menu-item"><a href="#" class="map-menu-link"><img
+                                        src="./assets/images/ic-owner-search.svg"> 地籍所有權人查詢</a></li>
+                            <li class="map-menu-item"><a href="#" class="map-menu-link"><img
+                                        src="./assets/images/ic-flow.svg"> 渠道椿號查詢</a></li>
+                            <li class="map-menu-item"><a href="#" class="map-menu-link"><img
+                                        src="./assets/images/ic-land-check.svg"> 灌溉地普查</a></li>
+                            <li class="map-menu-item"><a href="#" class="map-menu-link"><img
+                                        src="./assets/images/ic-land-mark.svg"> 土地標示</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="map-dot" data-style="primary-dark" style="right: 50%; top: 50%;">2</div>
+            <div class="map-dot bg-white quaternary-color" data-style="quaternary" style="right: 10%; top: 20%;">2</div>
+            <div class="map-dot bg-white primary-dark-color" data-style="primary-dark" style="right: 30%; top: 40%;">2
+            </div>
+            <div class="map-result shadow-sm">
+                <button class="btn map-result-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#result">
+                    查詢結果<img src="./assets/images/ic-down-arrow.svg">
+                </button>
+                </p>
+                <div class="collapse bg-white" id="result">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <button class="map-result-tab nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-owner" type="button" role="tab"><img
+                                    src="./assets/images/ic-land-owner-tab.svg" class="me-2"> 地籍所有權人</button>
+                            <button class="map-result-tab nav-link" id="nav-profile-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-route" type="button" role="tab" data-style="primary"><img
+                                    src="./assets/images/ic-route-tab.svg" class="me-2"> 渠道椿號</button>
+                        </div>
+                    </nav>
+                    <div class="map-result-content tab-content p-3 scroll" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-owner" role="tabpanel">
+                            <iframe src="map-result-owner.html" frameborder="0" scrolling="no" id="mapResultOwner"
+                                onload="this.height=100"></iframe>
+                            <script type="text/javascript">
+                                window.setInterval("reinitIframe('mapResultOwner')", 200);
+                            </script>
+                        </div>
+                        <div class="tab-pane fade" id="nav-route" role="tabpanel">
+                            <iframe src="map-result-route.html" frameborder="0" scrolling="no" id="mapResultRoute"
+                                onload="this.height=100"></iframe>
+                            <script type="text/javascript">
+                                window.setInterval("reinitIframe('mapResultRoute')", 200);
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-----查有資料開始----->
+        <div class="side-info js-side-info bg-white" id="all-info">
+            <iframe src="side-info-member-land.html" frameborder="0" scrolling="auto" id="allInfo" name="allInfo"
+                onload="this.height=100" class="w-100">
+            </iframe>
+        </div>
+        <!-----查有資料結束----->
+    </div>
+    <!-----主要內容結束----->
+</div>
+</body>
+
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+	<title>農田水利署桃園管理處圖資平台</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="桃園農田水利會圖資平台,水利會圖資平台,圖資平台,桃園農田水利會">
+	<meta name="description" content="桃園農田水利會圖資平台" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta property="og:site_name" content="桃園農田水利會圖資平台" />
+	<meta property="og:image" content="assets/images/fb-img.png" />
+	<!--FB分享設定-->
+
+	<link rel="icon" href="assets/images/favicon.png" type="image/ico" />
+	<!--iconfont設定-->
+	<link rel="stylesheet" href="assets/style/all.css">
+	<link rel="stylesheet"
+		href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	<!--css設定-->
+</head>
+
+<body class="scroll">
+	<!-- SCRIPTS -->
+	<script src="assets/js/jquery-3.3.1.min.js"></script>
+	<script src="assets/js/bootstrap.bundle.js"></script>
+	<script src="assets/js/script.js"></script>
+	<script src="assets/js/footable.js"></script>
+	<script src="assets/js/moment-with-locales.min.js"></script>
+	<script src="assets/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			//拖曳功能
+			$(".js-draggable").draggable();
+			//日期功能
+			var options = {
+				locale: 'zh-tw',
+				defaultDate: new Date(),
+				format: 'L',
+				icons: {
+					time: "bi bi-clock",
+					date: "bi bi-calendar",
+					up: "bi bi-arrow-up",
+					down: "bi bi-arrow-down",
+					previous: "bi bi-chevron-left",
+					next: "bi bi-chevron-right",
+					today: "bi bi-clock",
+					clear: "bi bi-trash3"
+				},
+				widgetPositioning: {
+					vertical: 'bottom',
+				}
+			};
+			$('#change-from, #change-to, #approved-from, #approved-to ,#edit-apply ,#edit-approved ,#edit-construction ,#edit-completed, #check-from, #check-to').datetimepicker(options);
+			//拉霸控制項
+			updateProgress();
+			function updateProgress() {
+				var rangeContainers = document.querySelectorAll('.range-group');
+				rangeContainers.forEach(function (container) {
+					var range = container.querySelector('.form-range');
+					var progress = container.querySelector('.progress-bar');
+					range.addEventListener('input', function () {
+						var value = this.value;
+						progress.style.width = value + '%';
+						progress.setAttribute('aria-valuenow', value);
+						progress.setAttribute('style', 'width: ' + value + '%;');
+					});
+				});
+			}
+		});
+		//iframe高度控制
+		function reinitIframe(item) {
+			var iframe = document.getElementById(item);
+			try {
+				var bHeight = iframe.contentWindow.document.body.scrollHeight;
+				var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+				var height = Math.max(bHeight, dHeight);
+				iframe.height = height;
+				console.log(height);
+			} catch (ex) { }
+		}
+	</script>
+	<script type="text/javascript">
+		$(".js-side-info-body").find('button').click(function () {
+			let linkTarget = $(this).attr("data-bs-target");
+			window.parent.$(linkTarget).modal("show");
+		});
+	</script>
+
+	<button class="btn btn-sm btn-dark-primary-color ms-auto py-0 mb-2">全部清除</button>
+<div class="map-result-card toast fade show bd-primary-color mb-3" data-style="primary">
+    <div class="d-flex">
+        <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast"></button>
+    </div>
+    <div class="map-result-card-header border-bottom bd-primary-color pb-3">
+        <h3 class="map-result-card-title align-items-start">
+            <span class="bg-primary-dark-color">1<img src="./assets/images/ic-arrow-from-primary.svg"></span>
+            <p>茄苳溪(大竹、桃園) <br><span class="secondary-xdark-color p-0 font-sm">樁號：0K+964.36</span></p>
+        </h3>
+        <div class="badge primary-color bd-primary-color mt-auto">河溪</span>
+        </div>
+    </div>
+    <div class="map-result-card-body pt-3">
+        <h4 class="map-result-card-subtitle primary-color">
+            <img src="./assets/images/ic-pin-blue.svg" class="me-2"> 座標
+        </h4>
+        <ul class="map-result-card-list mb-3">
+            <li class="map-result-card-list-item">
+                <p class="text-center" style="width: 35%;">TWD97</p>
+                <span class="bd-primary-color text-center">276655 , 2761087</span>
+            </li>
+            <li class="map-result-card-list-item">
+                <p class="text-center" style="width: 35%;">WGS84</p>
+                <span class="bd-primary-color text-center">121.28915 , 25.03122</span>
+            </li>
+        </ul>
+        <h4 class="map-result-card-subtitle primary-color">
+            <img src="./assets/images/ic-route-blue.svg" class="me-2"> 渠道點
+        </h4>
+        <ul class="map-result-card-list mb-3">
+            <li class="map-result-card-list-item">
+                <p class="text-center" style="width: 35%;">TWD97</p>
+                <span class="bd-primary-color text-center">276655 , 2761087</span>
+            </li>
+            <li class="map-result-card-list-item">
+                <p class="text-center" style="width: 35%;">WGS84</p>
+                <span class="bd-primary-color text-center">121.28915 , 25.03122</span>
+            </li>
+        </ul>
+        <h4 class="map-result-card-subtitle primary-color">
+            <img src="./assets/images/ic-station-blue.svg" class="me-2"> 工作站/小組
+        </h4>
+        <ul class="map-result-card-list">
+            <li class="map-result-card-list-item">
+                <p class="text-center" style="width: 35%;">新屋站</p>
+                <span class="bd-primary-color text-center">第12支線下田小組</span>
+            </li>
+            <li class="map-result-card-list-item">
+                <p class="text-center" style="width: 35%;">新屋站</p>
+                <span class="bd-primary-color text-center">第12支線下田小組</span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="map-result-card toast fade show bd-primary-color mb-3" data-style="primary">
+    <div class="d-flex">
+        <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast"></button>
+    </div>
+    <div class="map-result-card-header border-bottom bd-primary-color pb-3">
+        <h3 class="map-result-card-title align-items-start">
+            <span class="bg-primary-dark-color">2<img src="./assets/images/ic-arrow-from-primary.svg"></span>
+            <p>溪洲圳<br><span class="secondary-xdark-color p-0 font-sm">樁號：0K+964.36</span></p>
+        </h3>
+        <div class="badge primary-color bd-primary-color mt-auto">幹線</span>
+        </div>
+    </div>
+    <div class="map-result-card-body pt-3">
+        <h4 class="map-result-card-subtitle primary-color">
+            <img src="./assets/images/ic-pin-blue.svg" class="me-2"> 座標
+        </h4>
+        <ul class="map-result-card-list mb-3">
+            <li class="map-result-card-list-item">
+                <p class="text-center" style="width: 35%;">TWD97</p>
+                <span class="bd-primary-color text-center">276655 , 2761087</span>
+            </li>
+            <li class="map-result-card-list-item">
+                <p class="text-center" style="width: 35%;">WGS84</p>
+                <span class="bd-primary-color text-center">121.28915 , 25.03122</span>
+            </li>
+        </ul>
+        <h4 class="map-result-card-subtitle primary-color">
+            <img src="./assets/images/ic-route-blue.svg" class="me-2"> 渠道點
+        </h4>
+        <ul class="map-result-card-list mb-3">
+            <li class="map-result-card-list-item">
+                <p class="text-center" style="width: 35%;">TWD97</p>
+                <span class="bd-primary-color text-center">276655 , 2761087</span>
+            </li>
+            <li class="map-result-card-list-item">
+                <p class="text-center" style="width: 35%;">WGS84</p>
+                <span class="bd-primary-color text-center">121.28915 , 25.03122</span>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+
+</html>

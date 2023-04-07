@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+	<title>農田水利署桃園管理處圖資平台</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="桃園農田水利會圖資平台,水利會圖資平台,圖資平台,桃園農田水利會">
+	<meta name="description" content="桃園農田水利會圖資平台" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta property="og:site_name" content="桃園農田水利會圖資平台" />
+	<meta property="og:image" content="assets/images/fb-img.png" />
+	<!--FB分享設定-->
+
+	<link rel="icon" href="assets/images/favicon.png" type="image/ico" />
+	<!--iconfont設定-->
+	<link rel="stylesheet" href="assets/style/all.css">
+	<link rel="stylesheet"
+		href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	<!--css設定-->
+</head>
+
+<body class="scroll">
+	<!-- SCRIPTS -->
+	<script src="assets/js/jquery-3.3.1.min.js"></script>
+	<script src="assets/js/bootstrap.bundle.js"></script>
+	<script src="assets/js/script.js"></script>
+	<script src="assets/js/footable.js"></script>
+	<script src="assets/js/moment-with-locales.min.js"></script>
+	<script src="assets/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			//拖曳功能
+			$(".js-draggable").draggable();
+			//日期功能
+			var options = {
+				locale: 'zh-tw',
+				defaultDate: new Date(),
+				format: 'L',
+				icons: {
+					time: "bi bi-clock",
+					date: "bi bi-calendar",
+					up: "bi bi-arrow-up",
+					down: "bi bi-arrow-down",
+					previous: "bi bi-chevron-left",
+					next: "bi bi-chevron-right",
+					today: "bi bi-clock",
+					clear: "bi bi-trash3"
+				},
+				widgetPositioning: {
+					vertical: 'bottom',
+				}
+			};
+			$('#change-from, #change-to, #approved-from, #approved-to ,#edit-apply ,#edit-approved ,#edit-construction ,#edit-completed, #check-from, #check-to').datetimepicker(options);
+			//拉霸控制項
+			updateProgress();
+			function updateProgress() {
+				var rangeContainers = document.querySelectorAll('.range-group');
+				rangeContainers.forEach(function (container) {
+					var range = container.querySelector('.form-range');
+					var progress = container.querySelector('.progress-bar');
+					range.addEventListener('input', function () {
+						var value = this.value;
+						progress.style.width = value + '%';
+						progress.setAttribute('aria-valuenow', value);
+						progress.setAttribute('style', 'width: ' + value + '%;');
+					});
+				});
+			}
+		});
+		//iframe高度控制
+		function reinitIframe(item) {
+			var iframe = document.getElementById(item);
+			try {
+				var bHeight = iframe.contentWindow.document.body.scrollHeight;
+				var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+				var height = Math.max(bHeight, dHeight);
+				iframe.height = height;
+				console.log(height);
+			} catch (ex) { }
+		}
+	</script>
+	<script type="text/javascript">
+		$(".js-side-info-body").find('button').click(function () {
+			let linkTarget = $(this).attr("data-bs-target");
+			window.parent.$(linkTarget).modal("show");
+		});
+	</script>
+
+	<button class="btn btn-primary side-info-toggle rounded-0 js-side-info-toggler" type="button" data-bs-toggle="collapse"
+    data-bs-target="#land-check-list">
+    <p class="side-info-title"><img src="./assets/images/ic-irrigated-search.svg" class="me-2"> 灌溉地普查</p>
+    <img src="./assets/images/ic-circle-down-blue.svg" alt="伸縮">
+</button>
+<div class="side-info-content-wrapper collapse show" id="land-check-list">
+    <div class="card-body h-100">
+        <h5 class="d-flex flex-wrap mb-0">
+            <button class="btn btn-dark-quaternary-light-color btn-sm me-2 mb-2">
+                <img src="./assets/images/ic-filter.svg" class="me-1"> 篩選
+            </button>
+            <p class="ms-auto mb-2 font-xs quaternary-color">
+                已查核筆數：182837，未查核筆數：0；工作站已查核筆數：17227，工作站未查核筆數：0
+            </p>
+        </h5>
+        <div class="side-info-content">
+            <table class="table table-basic mb-0 bg-white" data-toggle-column="last" id="side-info-table">
+                <thead>
+                    <tr>
+                        <th width="150">查核時間</th>
+                        <th width="90">查核人員</th>
+                        <th width="80" data-breakpoints="xs sm">工作站</th>
+                        <th width="70" data-breakpoints="xs sm md">縣市</th>
+                        <th width="100" data-breakpoints="xs sm" width="100">鄉鎮市區</th>
+                        <th width="60" data-breakpoints="xs sm">地段</th>
+                        <th width="80">地號</th>
+                        <th width="60" data-breakpoints="xs">地目</th>
+                        <th width="100" data-breakpoints="xs">都計內/外</th>
+                        <th width="100" data-breakpoints="xs sm">使用分類</th>
+                        <th width="100" data-breakpoints="xs sm md">使用分區</th>
+                        <th width="100" data-breakpoints="xs sm md">合計面積</th>
+                        <th width="110" data-breakpoints="xs sm md">灌溉地面積</th>
+                        <th width="110" data-breakpoints="xs sm md">非灌溉面積</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2022/03/11 16:03:14</td>
+                        <td>湯佳修</td>
+                        <td>桃園</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中路</td>
+                        <td>1878-41</td>
+                        <td>田</td>
+                        <td>外</td>
+                        <td>分類</td>
+                        <td>分區</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                    </tr>
+                    <tr>
+                        <td>2022/03/11 16:03:14</td>
+                        <td>湯佳修</td>
+                        <td>桃園</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中路</td>
+                        <td>1878-41</td>
+                        <td>田</td>
+                        <td>外</td>
+                        <td>分類</td>
+                        <td>分區</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                    </tr>
+                    <tr>
+                        <td>2022/03/11 16:03:14</td>
+                        <td>湯佳修</td>
+                        <td>桃園</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中路</td>
+                        <td>1878-41</td>
+                        <td>田</td>
+                        <td>外</td>
+                        <td>分類</td>
+                        <td>分區</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                    </tr>
+                    <tr>
+                        <td>2022/03/11 16:03:14</td>
+                        <td>湯佳修</td>
+                        <td>桃園</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中路</td>
+                        <td>1878-41</td>
+                        <td>田</td>
+                        <td>外</td>
+                        <td>分類</td>
+                        <td>分區</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                    </tr>
+                    <tr>
+                        <td>2022/03/11 16:03:14</td>
+                        <td>湯佳修</td>
+                        <td>桃園</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中路</td>
+                        <td>1878-41</td>
+                        <td>田</td>
+                        <td>外</td>
+                        <td>分類</td>
+                        <td>分區</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                    </tr>
+                    <tr>
+                        <td>2022/03/11 16:03:14</td>
+                        <td>湯佳修</td>
+                        <td>桃園</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中路</td>
+                        <td>1878-41</td>
+                        <td>田</td>
+                        <td>外</td>
+                        <td>分類</td>
+                        <td>分區</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                    </tr>
+                    <tr>
+                        <td>2022/03/11 16:03:14</td>
+                        <td>湯佳修</td>
+                        <td>桃園</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中路</td>
+                        <td>1878-41</td>
+                        <td>田</td>
+                        <td>外</td>
+                        <td>分類</td>
+                        <td>分區</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                    </tr>
+                    <tr>
+                        <td>2022/03/11 16:03:14</td>
+                        <td>湯佳修</td>
+                        <td>桃園</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中路</td>
+                        <td>1878-41</td>
+                        <td>田</td>
+                        <td>外</td>
+                        <td>分類</td>
+                        <td>分區</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                    </tr>
+                    <tr>
+                        <td>2022/03/11 16:03:14</td>
+                        <td>湯佳修</td>
+                        <td>桃園</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中路</td>
+                        <td>1878-41</td>
+                        <td>田</td>
+                        <td>外</td>
+                        <td>分類</td>
+                        <td>分區</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                    </tr>
+                    <tr>
+                        <td>2022/03/11 16:03:14</td>
+                        <td>湯佳修</td>
+                        <td>桃園</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中路</td>
+                        <td>1878-41</td>
+                        <td>田</td>
+                        <td>外</td>
+                        <td>分類</td>
+                        <td>分區</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                    </tr>
+                    <tr>
+                        <td>2022/03/11 16:03:14</td>
+                        <td>湯佳修</td>
+                        <td>桃園</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中路</td>
+                        <td>1878-41</td>
+                        <td>田</td>
+                        <td>外</td>
+                        <td>分類</td>
+                        <td>分區</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                    </tr>
+                    <tr>
+                        <td>2022/03/11 16:03:14</td>
+                        <td>湯佳修</td>
+                        <td>桃園</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中路</td>
+                        <td>1878-41</td>
+                        <td>田</td>
+                        <td>外</td>
+                        <td>分類</td>
+                        <td>分區</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                    </tr>
+                    <tr>
+                        <td>2022/03/11 16:03:14</td>
+                        <td>湯佳修</td>
+                        <td>桃園</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中路</td>
+                        <td>1878-41</td>
+                        <td>田</td>
+                        <td>外</td>
+                        <td>分類</td>
+                        <td>分區</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                    </tr>
+                    <tr>
+                        <td>2022/03/11 16:03:14</td>
+                        <td>湯佳修</td>
+                        <td>桃園</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中路</td>
+                        <td>1878-41</td>
+                        <td>田</td>
+                        <td>外</td>
+                        <td>分類</td>
+                        <td>分區</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                    </tr>
+                    <tr>
+                        <td>2022/03/11 16:03:14</td>
+                        <td>湯佳修</td>
+                        <td>桃園</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中路</td>
+                        <td>1878-41</td>
+                        <td>田</td>
+                        <td>外</td>
+                        <td>分類</td>
+                        <td>分區</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                    </tr>
+                    <tr>
+                        <td>2022/03/11 16:03:14</td>
+                        <td>湯佳修</td>
+                        <td>桃園</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中路</td>
+                        <td>1878-41</td>
+                        <td>田</td>
+                        <td>外</td>
+                        <td>分類</td>
+                        <td>分區</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                    </tr>
+                    <tr>
+                        <td>2022/03/11 16:03:14</td>
+                        <td>湯佳修</td>
+                        <td>桃園</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中路</td>
+                        <td>1878-41</td>
+                        <td>田</td>
+                        <td>外</td>
+                        <td>分類</td>
+                        <td>分區</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                    </tr>
+                    <tr>
+                        <td>2022/03/11 16:03:14</td>
+                        <td>湯佳修</td>
+                        <td>桃園</td>
+                        <td>桃園市</td>
+                        <td>桃園區</td>
+                        <td>中路</td>
+                        <td>1878-41</td>
+                        <td>田</td>
+                        <td>外</td>
+                        <td>分類</td>
+                        <td>分區</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                        <td>30,932.2</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $('[data-bs-target="#edit"]').click(function () {
+        window.parent.$("#edit-toggler").trigger("click");
+    })
+</script>
+<script type="text/javascript">
+    $(function () {
+        //footable功能
+        $('.table-basic').footable({
+            "paging": {
+                "enabled": true,
+                "size": 15,
+            },
+            "sorting": {
+                "enabled": true
+            }
+        });
+    });
+</script>
+</body>
+
+</html>

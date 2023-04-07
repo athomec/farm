@@ -1,6 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-  <g id="ic-statistics" opacity="0.7">
-    <rect id="Rectangle_324" data-name="Rectangle 324" width="24" height="24" fill="none"/>
-    <path id="Path_724" data-name="Path 724" d="M22,10v8H20V10ZM20,20v2h2V20Zm-2-2.71A8,8,0,1,1,12,4v9l7.55-7.55A10,10,0,1,0,18,20Z" fill="#3c9bef"/>
-  </g>
+<svg id="ic-statistics" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <path id="Path_1685" data-name="Path 1685" d="M0,0H24V24H0Z" fill="none"/>
+  <path id="Path_1686" data-name="Path 1686" d="M13,5.08A7,7,0,0,1,18.92,11h3.03A10.012,10.012,0,0,0,13,2.05V5.08ZM18.92,13A7,7,0,0,1,13,18.92v3.03A10.012,10.012,0,0,0,21.95,13H18.92ZM11,18.92A6.991,6.991,0,0,1,11,5.08V2.05a10,10,0,0,0,0,19.9Z" fill="#87adf9"/>
 </svg>

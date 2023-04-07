@@ -1,0 +1,22 @@
+<svg id="ic-range" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+  <g id="Group_370" data-name="Group 370">
+    <rect id="Rectangle_527" data-name="Rectangle 527" width="18" height="18" fill="none"/>
+  </g>
+  <g id="Group_372" data-name="Group 372" transform="translate(1.938 1.938)">
+    <g id="Group_371" data-name="Group 371">
+      <ellipse id="Ellipse_14" data-name="Ellipse 14" cx="0.5" cy="1" rx="0.5" ry="1" transform="translate(2.062 8.062)" fill="#649c19"/>
+      <ellipse id="Ellipse_15" data-name="Ellipse 15" cx="0.5" cy="1" rx="0.5" ry="1" transform="translate(2.062 11.062)" fill="#649c19"/>
+      <ellipse id="Ellipse_16" data-name="Ellipse 16" cx="0.5" cy="1" rx="0.5" ry="1" transform="translate(2.062 5.062)" fill="#649c19"/>
+      <circle id="Ellipse_17" data-name="Ellipse 17" cx="0.388" cy="0.388" r="0.388" transform="translate(0 5.427)" fill="#649c19"/>
+      <circle id="Ellipse_18" data-name="Ellipse 18" cx="0.5" cy="0.5" r="0.5" transform="translate(2.062 2.062)" fill="#649c19"/>
+      <circle id="Ellipse_19" data-name="Ellipse 19" cx="0.388" cy="0.388" r="0.388" transform="translate(0 8.529)" fill="#649c19"/>
+      <circle id="Ellipse_20" data-name="Ellipse 20" cx="0.388" cy="0.388" r="0.388" transform="translate(5.427 13.956)" fill="#649c19"/>
+      <circle id="Ellipse_21" data-name="Ellipse 21" cx="0.388" cy="0.388" r="0.388" transform="translate(5.427)" fill="#649c19"/>
+      <ellipse id="Ellipse_22" data-name="Ellipse 22" cx="1" cy="0.5" rx="1" ry="0.5" transform="translate(5.062 2.062)" fill="#649c19"/>
+      <circle id="Ellipse_23" data-name="Ellipse 23" cx="1.163" cy="1.163" r="1.163" transform="translate(4.652 7.753)" fill="#649c19"/>
+      <circle id="Ellipse_24" data-name="Ellipse 24" cx="1.163" cy="1.163" r="1.163" transform="translate(4.652 4.652)" fill="#649c19"/>
+      <circle id="Ellipse_25" data-name="Ellipse 25" cx="1" cy="1" r="1" transform="translate(5.062 11.062)" fill="#649c19"/>
+      <path id="Path_1672" data-name="Path 1672" d="M12,3V4.551a5.427,5.427,0,0,1,0,10.855v1.551A6.978,6.978,0,0,0,12,3Z" transform="translate(-4.634 -2.612)" fill="#649c19"/>
+    </g>
+  </g>
+</svg>

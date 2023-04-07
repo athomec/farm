@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+	<title>農田水利署桃園管理處圖資平台</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="桃園農田水利會圖資平台,水利會圖資平台,圖資平台,桃園農田水利會">
+	<meta name="description" content="桃園農田水利會圖資平台" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta property="og:site_name" content="桃園農田水利會圖資平台" />
+	<meta property="og:image" content="assets/images/fb-img.png" />
+	<!--FB分享設定-->
+
+	<link rel="icon" href="assets/images/favicon.png" type="image/ico" />
+	<!--iconfont設定-->
+	<link rel="stylesheet" href="assets/style/all.css">
+	<link rel="stylesheet"
+		href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	<!--css設定-->
+</head>
+
+<body class="scroll">
+	<!-- SCRIPTS -->
+	<script src="assets/js/jquery-3.3.1.min.js"></script>
+	<script src="assets/js/bootstrap.bundle.js"></script>
+	<script src="assets/js/script.js"></script>
+	<script src="assets/js/footable.js"></script>
+	<script src="assets/js/moment-with-locales.min.js"></script>
+	<script src="assets/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			//拖曳功能
+			$(".js-draggable").draggable();
+			//日期功能
+			var options = {
+				locale: 'zh-tw',
+				defaultDate: new Date(),
+				format: 'L',
+				icons: {
+					time: "bi bi-clock",
+					date: "bi bi-calendar",
+					up: "bi bi-arrow-up",
+					down: "bi bi-arrow-down",
+					previous: "bi bi-chevron-left",
+					next: "bi bi-chevron-right",
+					today: "bi bi-clock",
+					clear: "bi bi-trash3"
+				},
+				widgetPositioning: {
+					vertical: 'bottom',
+				}
+			};
+			$('#change-from, #change-to, #approved-from, #approved-to ,#edit-apply ,#edit-approved ,#edit-construction ,#edit-completed, #check-from, #check-to').datetimepicker(options);
+			//拉霸控制項
+			updateProgress();
+			function updateProgress() {
+				var rangeContainers = document.querySelectorAll('.range-group');
+				rangeContainers.forEach(function (container) {
+					var range = container.querySelector('.form-range');
+					var progress = container.querySelector('.progress-bar');
+					range.addEventListener('input', function () {
+						var value = this.value;
+						progress.style.width = value + '%';
+						progress.setAttribute('aria-valuenow', value);
+						progress.setAttribute('style', 'width: ' + value + '%;');
+					});
+				});
+			}
+		});
+		//iframe高度控制
+		function reinitIframe(item) {
+			var iframe = document.getElementById(item);
+			try {
+				var bHeight = iframe.contentWindow.document.body.scrollHeight;
+				var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+				var height = Math.max(bHeight, dHeight);
+				iframe.height = height;
+				console.log(height);
+			} catch (ex) { }
+		}
+	</script>
+	<script type="text/javascript">
+		$(".js-side-info-body").find('button').click(function () {
+			let linkTarget = $(this).attr("data-bs-target");
+			window.parent.$(linkTarget).modal("show");
+		});
+	</script>
+
+	<button class="btn btn-primary side-info-toggle rounded-0 js-side-info-toggler" type="button" data-bs-toggle="collapse"
+    data-bs-target="#member-land-content">
+    <p class="side-info-title"><img src="./assets/images/ic-member.svg" class="me-2"> 會員土地資料</p>
+    <img src="./assets/images/ic-circle-down-blue.svg" alt="伸縮">
+</button>
+<div class="side-info-content-wrapper collapse show" id="member-land-content">
+    <div class="card-body h-100">
+        <h5 class="d-flex flex-wrap mb-0">
+            <button class="btn btn-dark-quaternary-light-color btn-sm me-2 mb-2">
+                <img src="./assets/images/ic-filter.svg" class="me-1"> 篩選
+            </button>
+            <button class="btn btn-dark-secondary-color btn-sm me-2 mb-2">
+                <img src="./assets/images/ic-download-white.svg" class="me-1"> CSV
+            </button>
+            <div class="side-info-tool mb-2">
+                <button class="btn btn-dark-tertiary-color btn-sm border-0 side-info-tool-btn collapsed"
+                    data-bs-toggle="collapse" data-bs-target="#analysis">
+                    <img src="./assets/images/ic-around.svg" class="me-1"> 環域分析
+                </button>
+                <div class="collapse collapse-horizontal me-2" id="analysis">
+                    <div style="width: 210px;">
+                        <ul class="nav nav-pills side-info-tool-con px-2" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" type="button" role="tab" data-bs-toggle="pill">
+                                    <img src="./assets/images/ic-tool-swipe.svg" alt="Pan">
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" type="button" role="tab" data-bs-toggle="pill">
+                                    <img src="./assets/images/ic-tool-pentagon.svg" alt="pentagon">
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" type="button" role="tab" data-bs-toggle="pill">
+                                    <img src="./assets/images/ic-tool-square.svg" alt="rectangle">
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" type="button" role="tab" data-bs-toggle="pill">
+                                    <img src="./assets/images/ic-tool-circle.svg" alt="circle">
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" type="button" role="tab" data-bs-toggle="pill">
+                                    <img src="./assets/images/ic-tool-trash.svg" alt="delete">
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" type="button" role="tab" data-bs-toggle="pill">
+                                    <img src="./assets/images/ic-tool-analyse.svg" alt="analyse">
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="d-flex justify-content-end align-items-center font-xs font-light ms-auto secondary-xdark-color mb-2">
+                <span class="flex-shrink-0 me-1">顯示</span>
+                <label for="list-amount" class="sr-only"></label>
+                <select class="form-select form-select-sm rounded-3 me-1" id="list-amount"
+                    style="width: calc(100% - 80px);">
+                    <option selected="">20</option>
+                    <option value="1">30</option>
+                    <option value="2">40</option>
+                </select>
+                <span class="flex-shrink-0 me-3">項結果</span>
+            </div>
+            <button
+                class="btn btn-dark-secondary-xdark-color btn-sm me-2 mb-2 side-info-mode-toggler js-side-info-mode-toggler"
+                data-con="地圖輔助模式">
+            </button>
+            <button class="circle-btn btn-dark-secondary-color mb-2"><img src="./assets/images/ic-reset-white.svg"
+                    alt="重整"></button>
+        </h5>
+        <div class="side-info-content">
+                <table class="table table-basic mb-0 bg-white" data-toggle-column="last" id="side-info-table">
+                    <thead>
+                        <tr>
+                            <th width="80">姓名</th>
+                            <th width="90" data-breakpoints="xs sm">身分證</th>
+                            <th width="140" data-breakpoints="xs sm">生日</th>
+                            <th width="140" data-breakpoints="xs">電話</th>
+                            <th width="80" data-breakpoints="xs sm md">租約</th>
+                            <th width="140" width="100">異動日期</th>
+                            <th width="90">業佃別</th>
+                            <th data-breakpoints="xs sm md">作業地址</th>
+                            <th width="120" data-breakpoints="xs sm md">改善同意書</th>
+                            <th width="100" data-breakpoints="xs sm md">詳細資料</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">桃園市中壢區青埔路二段139號</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">新北市新莊區昌平里013鄰昌平街71巷1號十六樓</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">桃園市中壢區青埔路二段139號</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">新北市新莊區昌平里013鄰昌平街71巷1號十六樓</td>
+                            <td><img src="./assets/images/ic-done-file.svg" alt="檔案已上傳" class="d-inline-block"></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">桃園市中壢區青埔路二段139號</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">桃園市中壢區青埔路二段139號</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">桃園市中壢區青埔路二段139號</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">桃園市中壢區青埔路二段139號</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">桃園市中壢區青埔路二段139號</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">桃園市中壢區青埔路二段139號</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">桃園市中壢區青埔路二段139號</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">桃園市中壢區青埔路二段139號</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">桃園市中壢區青埔路二段139號</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">桃園市中壢區青埔路二段139號</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">桃園市中壢區青埔路二段139號</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">桃園市中壢區青埔路二段139號</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">桃園市中壢區青埔路二段139號</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">桃園市中壢區青埔路二段139號</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">桃園市中壢區青埔路二段139號</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">桃園市中壢區青埔路二段139號</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                        <tr>
+                            <td>王紅英</td>
+                            <td>B123456789</td>
+                            <td>1990/12/12</td>
+                            <td>0910123456</td>
+                            <td>10</td>
+                            <td>2010/10/12</td>
+                            <td>業佃別</td>
+                            <td class="text-start">桃園市中壢區青埔路二段139號</td>
+                            <td><a href="#" class="img-link d-inline-block"><img
+                                        src="./assets/images/ic-upload-file.svg" alt="上傳同意書"></a></td>
+                            <td><a href="#" class="img-link d-inline-block"><img src="./assets/images/ic-detail.svg"
+                                        alt="詳細資料"></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        //footable功能
+        $('.table-basic').footable({
+            "paging": {
+                "enabled": true,
+                "size": 15,
+            },
+            "sorting": {
+                "enabled": true
+            }
+        });
+    });
+</script>
+</body>
+
+</html>

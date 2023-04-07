@@ -1,0 +1,11 @@
+<svg id="ic-waste" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Group_379" data-name="Group 379">
+    <rect id="Rectangle_539" data-name="Rectangle 539" width="24" height="24" fill="none"/>
+  </g>
+  <g id="Group_381" data-name="Group 381">
+    <g id="Group_380" data-name="Group 380">
+      <path id="Path_1687" data-name="Path 1687" d="M9,13.05a3,3,0,0,0,6,0c0-1.31-.53-1.69-3-4.55C9.52,11.38,9,11.75,9,13.05Z" fill="#87adf9"/>
+      <path id="Path_1688" data-name="Path 1688" d="M20,13a1,1,0,0,0,0-2H19V5h1a1,1,0,0,0,0-2H4A1,1,0,0,0,4,5H5v6H4a1,1,0,0,0,0,2H5v6H4a1,1,0,0,0,0,2H20a1,1,0,0,0,0-2H19V13Zm-3,6H7V13a1,1,0,0,0,0-2V5H17v6a1,1,0,0,0,0,2Z" fill="#87adf9"/>
+    </g>
+  </g>
+</svg>
