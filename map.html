@@ -102,6 +102,11 @@
                 onload="this.height=100"></iframe>
             <script type="text/javascript">
                 window.setInterval("reinitIframe('modalHelp')", 200);
+                $(function () {
+                $('#help').modal({
+                        backdrop: false
+                    });
+                    })
             </script>
         </div>
     </div>
