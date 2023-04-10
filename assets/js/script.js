@@ -12,34 +12,38 @@ $(function () {//JS開頭
 	//---------------------側邊選單設定------------------------
 	$(".js-btn-all-info").click(function () {//底部視窗
 		let content = $(this).attr("data-target");
-		window.parent.$(".js-map-content").css('height',' calc(100% - 280px)');
+		window.parent.$(".js-map-content-wrapper").css('height',' calc(100% - 280px)');
 		window.parent.$(content).addClass("open");
-		window.parent.$(".js-map-content").removeClass("hide");
+		window.parent.$(".js-map-content-wrapper").removeClass("hide");
 		window.parent.$(content).css('height','280px');
 	})
 	$(".js-side-info-toggler").click(function () {//底部視窗收合
         if($(this).hasClass("collapsed")){
             window.parent.$(".js-side-info").addClass("smaller");
-			window.parent.$(".js-map-content").addClass("bigger");
+			window.parent.$(".js-map-content-wrapper").addClass("bigger");
         }else{
             window.parent.$(".js-side-info").removeClass("smaller");
-			window.parent.$(".js-map-content").removeClass("bigger");
+			window.parent.$(".js-map-content-wrapper").removeClass("bigger");
         }
 	});
 	$(".js-side-info-search-full").click(function () {//底部視窗滿版
 		window.parent.$(".js-side-info").addClass("full");
-		window.parent.$(".js-map-content").addClass("hide");
+		window.parent.$(".js-map-content-wrapper").addClass("hide");
 	})
 	$(".js-side-info-mode-toggler").click(function () {//底部視窗滿版切換模式
 		$(this).toggleClass("active");
 		window.parent.$(".js-side-info").toggleClass("full");
-		window.parent.$(".js-map-content").toggleClass("hide");
+		window.parent.$(".js-map-content-wrapper").toggleClass("hide");
+	})
+	$(".js-map-comparison").click(function () {//地圖比對
+		$(".js-map-content").toggleClass("compare");
+		//$(".js-map-comparison").toggleClass("open");
 	})
 	
 	
 	$(".js-info-closer").click(function () {
-		$(".js-map-content").removeClass('open');
-		$(".js-map-content").css('height',' calc(100vh - 54px)');
+		$(".js-map-content-wrapper").removeClass('open');
+		$(".js-map-content-wrapper").css('height',' calc(100vh - 54px)');
 		$(".js-side-info").removeClass('open');
 	})
 	$(".js-side-menu-toggler").click(function () {
@@ -47,9 +51,9 @@ $(function () {//JS開頭
 		$(".js-side-content").toggleClass("close");
 	})
 	//---------------------視窗拖曳設定------------------------
-	$('.js-map-content').resizable();
+	$('.js-map-content-wrapper').resizable();
 	const resizeObserver = new ResizeObserver(onResize);
-	resizeObserver.observe(document.querySelector('.js-map-content'));
+	resizeObserver.observe(document.querySelector('.js-map-content-wrapper'));
 	
 	function onResize(e) {
 		$(".js-side-info").addClass("hide");

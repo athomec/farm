@@ -191,7 +191,7 @@
                         <!--ic-tool開頭的圖片即工具icon切圖-->
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" title="地圖比對">
+                        <a class="nav-link js-map-comparison" href="#" title="地圖比對">
                             <img src="./assets/images/ic-check.svg" alt="地圖比對">
                             <p>地圖比對</p>
                         </a>
@@ -948,34 +948,7 @@
     <!-----主要內容開始----->
     <div class="side-content js-side-content">
         <!-----地圖開始----->
-        <div class="map-content js-map-content"
-            style="background: url('assets/images/map-demo.jpg'); background-size: cover;">
-            <div class="toast-container js-draggable" style="width: 190px; left: 100px;top: 100px;">
-                <div class="toast fade show" role="alert">
-                    <div class="toast-header bg-secondary-color py-1">
-                        <button type="button" class="btn-close btn-close-white ms-auto"
-                            data-bs-dismiss="toast"></button>
-                    </div>
-                    <div class="toast-body p-0">
-                        <ul class="map-menu">
-                            <li class="map-menu-item"><a href="#" class="map-menu-link"><img
-                                        src="./assets/images/ic-copy-locate.svg"> 複製此處座標</a></li>
-                            <li class="map-menu-item"><a href="#" class="map-menu-link"><img
-                                        src="./assets/images/ic-owner-search.svg"> 地籍所有權人查詢</a></li>
-                            <li class="map-menu-item"><a href="#" class="map-menu-link"><img
-                                        src="./assets/images/ic-flow.svg"> 渠道椿號查詢</a></li>
-                            <li class="map-menu-item"><a href="#" class="map-menu-link"><img
-                                        src="./assets/images/ic-land-check.svg"> 灌溉地普查</a></li>
-                            <li class="map-menu-item"><a href="#" class="map-menu-link"><img
-                                        src="./assets/images/ic-land-mark.svg"> 土地標示</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="map-dot" data-style="primary-dark" style="right: 50%; top: 50%;">2</div>
-            <div class="map-dot bg-white quaternary-color" data-style="quaternary" style="right: 10%; top: 20%;">2</div>
-            <div class="map-dot bg-white primary-dark-color" data-style="primary-dark" style="right: 30%; top: 40%;">2
-            </div>
+        <div class="map-content-wrapper js-map-content-wrapper">
             <div class="map-result shadow-sm">
                 <button class="btn map-result-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#result">
                     查詢結果<img src="./assets/images/ic-down-arrow.svg">
@@ -1010,7 +983,38 @@
                     </div>
                 </div>
             </div>
+            <div class="map-content js-map-content" style="background: url('assets/images/map-demo.jpg'); background-size: cover;">
+                <div class="toast-container js-draggable" style="width: 190px; left: 100px;top: 100px;">
+                    <div class="toast fade show" role="alert">
+                        <div class="toast-header bg-secondary-color py-1">
+                            <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="toast"></button>
+                        </div>
+                        <div class="toast-body p-0">
+                            <ul class="map-menu">
+                                <li class="map-menu-item"><a href="#" class="map-menu-link"><img
+                                            src="./assets/images/ic-copy-locate.svg"> 複製此處座標</a></li>
+                                <li class="map-menu-item"><a href="#" class="map-menu-link"><img
+                                            src="./assets/images/ic-owner-search.svg"> 地籍所有權人查詢</a></li>
+                                <li class="map-menu-item"><a href="#" class="map-menu-link"><img src="./assets/images/ic-flow.svg">
+                                        渠道椿號查詢</a></li>
+                                <li class="map-menu-item"><a href="#" class="map-menu-link"><img
+                                            src="./assets/images/ic-land-check.svg"> 灌溉地普查</a></li>
+                                <li class="map-menu-item"><a href="#" class="map-menu-link"><img
+                                            src="./assets/images/ic-land-mark.svg"> 土地標示</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-dot" data-style="primary-dark" style="right: 50%; top: 50%;">2</div>
+                <div class="map-dot bg-white quaternary-color" data-style="quaternary" style="right: 10%; top: 20%;">2</div>
+                <div class="map-dot bg-white primary-dark-color" data-style="primary-dark" style="right: 30%; top: 40%;">2
+                </div>
+            </div>
+            <div class="map-compare js-map-content"
+                style="background: url('assets/images/map-demo1.png'); background-size: cover;">
+            </div>
         </div>
+        
         <!-----查有資料開始----->
         <div class="side-info js-side-info bg-white" id="all-info">
             <iframe src="side-info-member-land.html" frameborder="0" scrolling="auto" id="allInfo" name="allInfo"

@@ -11185,6 +11185,9 @@ ol {
 .modal-xl {
   max-width: 1500px; }
 
+iframe {
+  width: 100%; }
+
 /*-----------------連結樣式---------------------*/
 .link-primary-color {
   color: #29ABE2; }
@@ -15656,24 +15659,52 @@ footer .footer-logo {
     margin-left: 0; }
 
 /*------------------地圖區塊開始--------------------*/
-.map-content {
+.map-content-wrapper {
   height: calc(100vh - 73px);
-  overflow: hidden; }
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease; }
   @media (max-width: 1200px) {
-    .map-content {
+    .map-content-wrapper {
       height: calc(100vh - 59px); } }
-  .map-content.open {
+  .map-content-wrapper.open {
     height: calc(100vh - 314px); }
-  .map-content.hide {
+  .map-content-wrapper.hide {
     height: 0 !important; }
-  .map-content.bigger {
+  .map-content-wrapper.bigger {
     height: calc(100vh - 36px) !important; }
-  .map-content iframe {
-    width: 100%; }
-  .map-content.ui-state-disabled {
+  .map-content-wrapper.compare {
+    width: 50%; }
+  .map-content-wrapper.ui-state-disabled {
     opacity: 1; }
-  .map-content .toast-container {
+  .map-content-wrapper .toast-container {
     z-index: 100; }
+
+.map-content {
+  width: 100%;
+  position: relative;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease; }
+  .map-content.compare {
+    width: 50%; }
+
+.map-compare {
+  width: 100%;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease; }
+  .map-compare.compare {
+    width: 50%;
+    display: block; }
 
 /*------------------底部視窗開始--------------------*/
 .side-info {
@@ -15684,7 +15715,10 @@ footer .footer-logo {
           flex: 1;
   display: none;
   position: relative;
-  z-index: 100; }
+  z-index: 100;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease; }
   .side-info-header {
     display: -webkit-box;
     display: -ms-flexbox;
