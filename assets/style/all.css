@@ -15671,6 +15671,12 @@ footer .footer-logo {
   @media (max-width: 1200px) {
     .map-content-wrapper {
       height: calc(100vh - 59px); } }
+  @media (max-width: 576px) {
+    .map-content-wrapper {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column; } }
   .map-content-wrapper.open {
     height: calc(100vh - 314px); }
   .map-content-wrapper.hide {
@@ -15694,6 +15700,10 @@ footer .footer-logo {
   transition: all 0.2s ease; }
   .map-content.compare {
     width: 50%; }
+    @media (max-width: 576px) {
+      .map-content.compare {
+        width: 100%;
+        height: 50%; } }
 
 .map-compare {
   width: 100%;
@@ -15705,6 +15715,10 @@ footer .footer-logo {
   .map-compare.compare {
     width: 50%;
     display: block; }
+    @media (max-width: 576px) {
+      .map-compare.compare {
+        width: 100%;
+        height: 50%; } }
 
 /*------------------底部視窗開始--------------------*/
 .side-info {
