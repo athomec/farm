@@ -18200,17 +18200,27 @@ body .ui-tooltip {
   border-radius: 8px; }
 
 /*------------------------後台設定開始----------------------------*/
+#backstage .modal-dialog {
+  max-width: 100%;
+  min-height: 100vh;
+  margin: 0; }
+
+#backstage .modal-content {
+  background: none;
+  border: none; }
+
 .bg-backstage {
   background: url("../images/backstage-bg.jpg");
-  background-size: cover;
-  min-height: calc(100vh - 48px); }
+  background-size: cover; }
 
 .navbar[data-con="backstage"] {
   -webkit-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
   padding-top: 0;
-  padding-bottom: 0; }
+  padding-bottom: 0;
+  position: relative;
+  z-index: 100; }
   .navbar[data-con="backstage"]-brand {
     width: 159px; }
     @media (max-width: 576px) {
@@ -18353,9 +18363,16 @@ body .ui-tooltip {
       width: 20px; }
 
 .backstage {
-  margin-top: 48px;
   padding-top: 56px;
   padding-bottom: 56px; }
+  @media (max-width: 768px) {
+    .backstage {
+      padding-top: 40px;
+      padding-bottom: 40px; } }
+  @media (max-width: 576px) {
+    .backstage {
+      padding-top: 16px;
+      padding-bottom: 16px; } }
   .backstage-header {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -18406,6 +18423,9 @@ body .ui-tooltip {
     margin-top: -30px;
     position: relative;
     z-index: 100; }
+    @media (max-width: 768px) {
+      .backstage .paging-txt {
+        margin-top: 0; } }
 
 .table-backstage {
   background: none; }
