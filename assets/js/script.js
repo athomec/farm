@@ -12,19 +12,19 @@ $(function () {//JS開頭
 	//---------------------側邊選單設定------------------------
 	$(".js-btn-all-info").click(function () {//底部視窗
 		let content = $(this).attr("data-target");
-		window.parent.$(".js-map-content-wrapper").css('height',' calc(100% - 280px)');
+		window.parent.$(".js-map-content-wrapper").css('height', ' calc(100% - 280px)');
 		window.parent.$(content).addClass("open");
 		window.parent.$(".js-map-content-wrapper").removeClass("hide");
-		window.parent.$(content).css('height','280px');
+		window.parent.$(content).css('height', '280px');
 	})
 	$(".js-side-info-toggler").click(function () {//底部視窗收合
-        if($(this).hasClass("collapsed")){
-            window.parent.$(".js-side-info").addClass("smaller");
+		if ($(this).hasClass("collapsed")) {
+			window.parent.$(".js-side-info").addClass("smaller");
 			window.parent.$(".js-map-content-wrapper").addClass("bigger");
-        }else{
-            window.parent.$(".js-side-info").removeClass("smaller");
+		} else {
+			window.parent.$(".js-side-info").removeClass("smaller");
 			window.parent.$(".js-map-content-wrapper").removeClass("bigger");
-        }
+		}
 	});
 	$(".js-side-info-search-full").click(function () {//底部視窗滿版
 		window.parent.$(".js-side-info").addClass("full");
@@ -39,11 +39,11 @@ $(function () {//JS開頭
 		$(".js-map-content").toggleClass("compare");
 		//$(".js-map-comparison").toggleClass("open");
 	})
-	
-	
+
+
 	$(".js-info-closer").click(function () {
 		$(".js-map-content-wrapper").removeClass('open');
-		$(".js-map-content-wrapper").css('height',' calc(100vh - 54px)');
+		$(".js-map-content-wrapper").css('height', ' calc(100vh - 54px)');
 		$(".js-side-info").removeClass('open');
 	})
 	$(".js-side-menu-toggler").click(function () {
@@ -51,16 +51,18 @@ $(function () {//JS開頭
 		$(".js-side-content").toggleClass("close");
 	})
 	//---------------------視窗拖曳設定------------------------
-	$('.js-map-content-wrapper').resizable();
+	$('.js-map-content-wrapper').resizable({
+		handles: 'n, s'
+	});
 	const resizeObserver = new ResizeObserver(onResize);
 	resizeObserver.observe(document.querySelector('.js-map-content-wrapper'));
-	
+
 	function onResize(e) {
 		$(".js-side-info").addClass("hide");
 		document.addEventListener('mouseup', function (e) {
 			$(".js-side-info").removeClass("hide");
 		});
-		
+
 	}
 	//底部視窗伸縮設定
 	//---------------------頁籤設定------------------------
@@ -121,7 +123,7 @@ $(function () {//JS開頭
 	/*個人資料視窗-編輯示意*/
 	$('#info-personal-edit').modal("show");
 
-	
+
 
 
 	RESIZE();
