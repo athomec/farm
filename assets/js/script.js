@@ -37,7 +37,12 @@ $(function () {//JS開頭
 	})
 	$(".js-map-comparison").click(function () {//地圖比對
 		$(".js-map-content").toggleClass("compare");
-		//$(".js-map-comparison").toggleClass("open");
+		$(".js-map-content-compare").toggleClass("compare");
+		if ($(".js-map-content-compare").hasClass("compare")) {
+			return false;
+		}else{
+			$(".js-map-content-compare").css("width", "");
+		}
 	})
 
 
@@ -52,7 +57,7 @@ $(function () {//JS開頭
 	})
 	//---------------------視窗拖曳設定------------------------
 	$('.js-map-content-wrapper').resizable({
-		handles: 'n, s'
+		handles: 's'
 	});
 	const resizeObserver = new ResizeObserver(onResize);
 	resizeObserver.observe(document.querySelector('.js-map-content-wrapper'));
@@ -62,8 +67,13 @@ $(function () {//JS開頭
 		document.addEventListener('mouseup', function (e) {
 			$(".js-side-info").removeClass("hide");
 		});
-
 	}
+
+	$('.js-map-content-compare').resizable({//地圖比對
+		handles: 'w'
+	});
+	const resizeObserver1 = new ResizeObserver(onResizeMap);
+	resizeObserver1.observe(document.querySelector('.js-map-content-compare'));
 	//底部視窗伸縮設定
 	//---------------------頁籤設定------------------------
 	$('.js-toggle-menu').find(".js-toggle-button").click(function () {
