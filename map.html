@@ -858,7 +858,7 @@
 <!-----側邊選單開始----->
 <div class="d-flex">
     <div class="side-menu js-side-menu" id="side-menu">
-        <button class="btn side-menu-toggler js-side-menu-toggler d-none d-md-flex" type="button">
+        <button class="btn side-menu-toggler js-side-menu-toggler js-map-inside-toggler d-none d-md-flex" type="button">
             <img src="./assets/images/ic-chevron-left.svg" alt="導引列表icon">
         </button>
         <div class="side-menu-body scroll">
@@ -1556,30 +1556,28 @@
                     </div>
                 </div>
             </div>
-            <div class="map-content js-map-content">
-                <div class="toast-container js-draggable" style="width: 190px; left: 100px;top: 100px;">
-                    <div class="toast fade show" role="alert">
-                        <div class="toast-header bg-secondary-color py-1">
-                            <button type="button" class="btn-close btn-close-white ms-auto"
-                                data-bs-dismiss="toast"></button>
-                        </div>
-                        <div class="toast-body p-0">
-                            <ul class="map-menu">
-                                <li class="map-menu-item"><a href="#" class="map-menu-link"><img
-                                            src="./assets/images/ic-copy-locate.svg"> 複製此處座標</a></li>
-                                <li class="map-menu-item"><a href="#" class="map-menu-link"><img
-                                            src="./assets/images/ic-owner-search.svg"> 地籍所有權人查詢</a></li>
-                                <li class="map-menu-item"><a href="#" class="map-menu-link"><img
-                                            src="./assets/images/ic-flow.svg">
-                                        渠道椿號查詢</a></li>
-                                <li class="map-menu-item"><a href="#" class="map-menu-link"><img
-                                            src="./assets/images/ic-land-check.svg"> 灌溉地普查</a></li>
-                                <li class="map-menu-item"><a href="#" class="map-menu-link"><img
-                                            src="./assets/images/ic-land-mark.svg"> 土地標示</a></li>
-                            </ul>
-                        </div>
+            <div class="toast-container js-draggable" style="width: 190px; left: 100px;top: 100px;">
+                <div class="toast fade show" role="alert">
+                    <div class="toast-header bg-secondary-color py-1">
+                        <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="toast"></button>
+                    </div>
+                    <div class="toast-body p-0">
+                        <ul class="map-menu">
+                            <li class="map-menu-item"><a href="#" class="map-menu-link"><img
+                                        src="./assets/images/ic-copy-locate.svg"> 複製此處座標</a></li>
+                            <li class="map-menu-item"><a href="#" class="map-menu-link"><img
+                                        src="./assets/images/ic-owner-search.svg"> 地籍所有權人查詢</a></li>
+                            <li class="map-menu-item"><a href="#" class="map-menu-link"><img src="./assets/images/ic-flow.svg">
+                                    渠道椿號查詢</a></li>
+                            <li class="map-menu-item"><a href="#" class="map-menu-link"><img
+                                        src="./assets/images/ic-land-check.svg"> 灌溉地普查</a></li>
+                            <li class="map-menu-item"><a href="#" class="map-menu-link"><img src="./assets/images/ic-land-mark.svg">
+                                    土地標示</a></li>
+                        </ul>
                     </div>
                 </div>
+            </div>
+            <div class="map-content js-map-content">
                 <div class="map-dot" data-style="primary-dark" style="right: 50%; top: 50%;">2</div>
                 <div class="map-dot bg-white quaternary-color" data-style="quaternary" style="right: 10%; top: 20%;">2
                 </div>
@@ -1612,19 +1610,26 @@
                 "size": 14,
             }
         });
-        //地圖比對內位置設定
+        //地圖比對內容器設定
         function resizeMapInside() {
             var mapContentWrapper = document.querySelector('.js-map-content-wrapper');
             var mapInsideList = document.querySelectorAll('.js-map-inside');
             var mapWidth = mapContentWrapper.offsetWidth;
+            var mapHeight = mapContentWrapper.offsetHeight;
 
             for (var i = 0; i < mapInsideList.length; i++) {
                 mapInsideList[i].style.width = mapWidth + 'px';
+                mapInsideList[i].style.height = mapHeight + 'px';
             }
         }
 
         resizeMapInside();
         window.addEventListener('resize', resizeMapInside);
+
+        $('.js-map-inside-toggler').click(function(){
+            $('.js-map-inside').toggleClass('full');
+        })
+
     });
 </script>
 </body>
