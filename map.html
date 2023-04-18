@@ -1556,8 +1556,7 @@
                     </div>
                 </div>
             </div>
-            <div class="map-content js-map-content"
-                style="background: url('assets/images/map-demo.jpg'); background-size: cover;">
+            <div class="map-content js-map-content">
                 <div class="toast-container js-draggable" style="width: 190px; left: 100px;top: 100px;">
                     <div class="toast fade show" role="alert">
                         <div class="toast-header bg-secondary-color py-1">
@@ -1587,9 +1586,10 @@
                 <div class="map-dot bg-white primary-dark-color" data-style="primary-dark"
                     style="right: 30%; top: 40%;">2
                 </div>
+                <div class="map-content-inside js-map-inside" style="background: url('assets/images/map-demo.jpg'); background-size: cover;"></div>
             </div>
-            <div class="map-compare js-map-content-compare"
-                style="background: url('assets/images/map-demo1.png'); background-size: cover;">
+            <div class="map-compare js-map-content-compare">
+                <div class="map-content-inside js-map-inside" style="background: url('assets/images/map-demo1.jpg'); background-size: cover;"></div>
             </div>
         </div>
 
@@ -1612,6 +1612,19 @@
                 "size": 14,
             }
         });
+        //地圖比對內位置設定
+        function resizeMapInside() {
+            var mapContentWrapper = document.querySelector('.js-map-content-wrapper');
+            var mapInsideList = document.querySelectorAll('.js-map-inside');
+            var mapWidth = mapContentWrapper.offsetWidth;
+
+            for (var i = 0; i < mapInsideList.length; i++) {
+                mapInsideList[i].style.width = mapWidth + 'px';
+            }
+        }
+
+        resizeMapInside();
+        window.addEventListener('resize', resizeMapInside);
     });
 </script>
 </body>

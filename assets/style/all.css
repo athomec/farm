@@ -15302,7 +15302,8 @@ iframe {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  font-weight: 600; }
+  font-weight: 600;
+  z-index: 10; }
   .map-dot:after {
     content: "";
     display: block;
@@ -15704,7 +15705,13 @@ footer .footer-logo {
           flex-grow: 0;
   -webkit-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
-  transition: all 0.2s ease; }
+  transition: all 0.2s ease;
+  overflow: hidden; }
+  .map-content-inside {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0; }
   .map-content.compare {
     width: 50%;
     -ms-flex-negative: 1;
@@ -15728,7 +15735,11 @@ footer .footer-logo {
   -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
   left: 0 !important;
-  margin-left: 10px; }
+  margin-left: 10px;
+  overflow: hidden; }
+  .map-compare .map-content-inside {
+    right: 0;
+    left: auto; }
   .map-compare.compare {
     width: 50%;
     margin-left: 0; }

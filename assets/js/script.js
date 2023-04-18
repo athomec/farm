@@ -74,6 +74,7 @@ $(function () {//JS開頭
 	});
 	const resizeObserver1 = new ResizeObserver(onResizeMap);
 	resizeObserver1.observe(document.querySelector('.js-map-content-compare'));
+
 	//底部視窗伸縮設定
 	//---------------------頁籤設定------------------------
 	$('.js-toggle-menu').find(".js-toggle-button").click(function () {
@@ -145,7 +146,7 @@ $(function () {//JS開頭
 	function RESIZE() {
 		WINDOWH = $(window).height();
 		WINDOW = $(window).width();
-
+		mapinside();
 		if (WINDOW < 768) {
 			$('.js-side-menu').addClass("close");
 			$(".js-side-content").addClass("close");
