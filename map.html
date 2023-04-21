@@ -1623,8 +1623,15 @@
             }
         }
 
+        // 初始化
         resizeMapInside();
-        window.addEventListener('resize', resizeMapInside);
+
+        // 監聽元素大小變化
+        var observer = new ResizeObserver(function (entries) {
+            // 如果元素大小變化，就重新計算高度和寬度
+            resizeMapInside();
+        });
+        observer.observe(document.querySelector('.js-map-content-wrapper'));
 
         $('.js-map-inside-toggler').click(function(){
             $('.js-map-inside').toggleClass('full');
