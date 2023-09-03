@@ -35,7 +35,17 @@
 	<script type="text/javascript">
 		$(function () {
 			//拖曳功能
-			$(".js-draggable").draggable();
+			$(".js-draggable").draggable({
+				touchStart: function (event, ui) {
+					// 在觸控開始時的處理
+				},
+				touchDrag: function (event, ui) {
+					// 在觸控拖曳時的處理
+				},
+				touchStop: function (event, ui) {
+					// 在觸控結束時的處理
+				}
+			});
 			//日期功能
 			var options = {
 				locale: 'zh-tw',
