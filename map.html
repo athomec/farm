@@ -35,17 +35,7 @@
 	<script type="text/javascript">
 		$(function () {
 			//拖曳功能
-			$(".js-draggable").draggable({
-				touchStart: function (event, ui) {
-					// 在觸控開始時的處理
-				},
-				touchDrag: function (event, ui) {
-					// 在觸控拖曳時的處理
-				},
-				touchStop: function (event, ui) {
-					// 在觸控結束時的處理
-				}
-			});
+			$(".js-draggable").draggable();
 			//日期功能
 			var options = {
 				locale: 'zh-tw',
@@ -1566,7 +1556,7 @@
                     </div>
                 </div>
             </div>
-            <div class="toast-container js-draggable" style="width: 190px; left: 100px;top: 100px;">
+            <div class="toast-container js-draggable" style="width: 190px; left: 100px;top: 60px;">
                 <div class="toast fade show" role="alert">
                     <div class="toast-header bg-secondary-color py-1">
                         <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="toast"></button>
@@ -1588,7 +1578,7 @@
                 </div>
             </div>
 
-            <div class="toast-container js-draggable" style="right: 100px;top: 150px;">
+            <div class="toast-container js-draggable" style="right: 40px;bottom: 40px;">
                 <div class="toast fade show fw-semibold" role="alert" style="width: 370px;">
                     <div class="toast-header bg-secondary-color py-1">
                         <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="toast"></button>
