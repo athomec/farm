@@ -1,0 +1,8 @@
+<svg id="ic-poly" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <g id="Group_572" data-name="Group 572">
+    <rect id="Rectangle_645" data-name="Rectangle 645" width="20" height="20" fill="none"/>
+  </g>
+  <g id="Group_573" data-name="Group 573" transform="translate(2.5 1.667)">
+    <path id="Path_1873" data-name="Path 1873" d="M13,13.667v1.05l-5-2.5V9.575L10.25,7h3.583V2h-5V6.083L6.583,8.667H3v5H7.167L13,16.583v2.083h5v-5Zm-2.5-10h1.667V5.333H10.5ZM6.333,12H4.667V10.333H6.333Zm10,5H14.667V15.333h1.667Z" transform="translate(-3 -2)" fill="#6595f6"/>
+  </g>
+</svg>

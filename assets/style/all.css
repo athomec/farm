@@ -15070,6 +15070,35 @@ iframe {
     .navbar .nav-dropdown-list li:last-child a {
       border-bottom: 0; }
 
+.map-function {
+  position: absolute;
+  left: 72px;
+  top: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: #fff;
+  z-index: 100; }
+  @media (max-width: 1200px) {
+    .map-function {
+      left: 48px; } }
+  @media (max-width: 991px) {
+    .map-function {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      top: 64px; } }
+  @media (max-width: 768px) {
+    .map-function {
+      left: 16px; } }
+  @media (max-width: 991px) {
+    .map-function-btn {
+      padding: 12px 8px; } }
+  .map-function-btn.active img {
+    -webkit-filter: invert(63%) sepia(75%) saturate(343%) hue-rotate(44deg) brightness(95%) contrast(97%);
+            filter: invert(63%) sepia(75%) saturate(343%) hue-rotate(44deg) brightness(95%) contrast(97%); }
+
 .map-menu-link {
   display: -webkit-box;
   display: -ms-flexbox;

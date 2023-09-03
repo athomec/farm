@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <g id="ic-swipe" transform="translate(-0.142 -0.142)">
+    <g id="Group_577" data-name="Group 577">
+      <rect id="Rectangle_647" data-name="Rectangle 647" width="20" height="20" transform="translate(0.142 0.142)" fill="none"/>
+    </g>
+    <g id="Group_580" data-name="Group 580" transform="translate(1.69 0.845)">
+      <g id="Group_579" data-name="Group 579">
+        <path id="Path_1877" data-name="Path 1877" d="M17.636,1.845V3.552a11.386,11.386,0,0,0-14.368,0V1.845H2V6.071H6.226V4.8H3.766a10.081,10.081,0,0,1,13.371,0H14.678V6.071H18.9V1.845Z" transform="translate(-2 -1)" fill="#6595f6"/>
+        <g id="Group_578" data-name="Group 578" transform="translate(1.69 3.381)">
+          <path id="Path_1878" data-name="Path 1878" d="M16.585,12.412,13.373,11A.89.89,0,0,0,13,10.916h-.549V7.223a2.188,2.188,0,0,0-1.919-2.214,2.12,2.12,0,0,0-2.307,2.1V14l-1.58-.338a1.663,1.663,0,0,0-1.462.473L4,15.328l4.327,4.386a1.662,1.662,0,0,0,1.192.5h5.536A1.681,1.681,0,0,0,16.72,18.8l.778-4.6A1.69,1.69,0,0,0,16.585,12.412Zm-.752,1.513-.778,4.6H9.519L6.392,15.328l3.524.752V7.113a.423.423,0,0,1,.845,0v5.223h1.488Z" transform="translate(-4 -5)" fill="#6595f6"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

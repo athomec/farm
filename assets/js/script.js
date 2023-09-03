@@ -55,6 +55,11 @@ $(function () {//JS開頭
 		$('.js-side-menu').toggleClass("close");
 		$(".js-side-content").toggleClass("close");
 	})
+	//---------------------地圖工具設定------------------------
+	$(".js-map-function").find("button").click(function () {
+		$(this).toggleClass("active");
+		$(".js-map-function").find("button").not(this).removeClass("active");
+	})
 	//---------------------視窗拖曳設定------------------------
 	$('.js-map-content-wrapper').resizable({
 		handles: 's'
