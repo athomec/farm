@@ -15390,7 +15390,7 @@ footer .footer-logo {
   -webkit-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
-  z-index: 200;
+  z-index: 250;
   background: #E5F2FF;
   -webkit-box-shadow: 0 10px 10px #a3a3a3;
           box-shadow: 0 10px 10px #a3a3a3; }
@@ -15718,8 +15718,17 @@ footer .footer-logo {
   .map-content-wrapper.ui-state-disabled {
     opacity: 1; }
   .map-content-wrapper .toast-container {
-    z-index: 100;
+    z-index: 200;
     position: absolute !important; }
+    .map-content-wrapper .toast-container[data-con="sum"] {
+      right: 40px;
+      bottom: 40px; }
+      @media (max-width: 420px) {
+        .map-content-wrapper .toast-container[data-con="sum"] {
+          width: 90%;
+          max-width: 370px;
+          bottom: 20px;
+          right: 5%; } }
 
 .map-content {
   width: 100%;
