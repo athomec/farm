@@ -15430,6 +15430,9 @@ footer .footer-logo {
     @media (max-width: 1200px) {
       .side-menu.close {
         left: -280px; } }
+    @media (max-width: 768px) {
+      .side-menu.close {
+        left: -290px; } }
     .side-menu.close .side-menu-toggler img {
       -webkit-transform: rotate(180deg);
           -ms-transform: rotate(180deg);
@@ -15729,7 +15732,7 @@ footer .footer-logo {
           width: 100% !important;
           bottom: auto;
           right: 0;
-          top: 0; } }
+          bottom: 0; } }
       @media (max-width: 420px) {
         .map-content-wrapper .toast-container[data-con="sum"] .toast {
           font-size: 0.8rem !important; } }

@@ -781,7 +781,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" title="測量功能">
+                        <a class="nav-link" href="#" title="測量功能" id="sumToastBtn">
                             <img src="./assets/images/ic-measure.svg" alt="測量功能">
                             <p>測量功能</p>
                         </a>
@@ -1559,7 +1559,8 @@
             <div class="toast-container js-draggable" style="width: 190px; left: 100px;top: 60px;">
                 <div class="toast fade show" role="alert">
                     <div class="toast-header bg-secondary-color py-1">
-                        <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="toast"></button>
+                        <button type="button" class="btn-close btn-close-white ms-auto"
+                            data-bs-dismiss="toast"></button>
                     </div>
                     <div class="toast-body p-0">
                         <ul class="map-menu">
@@ -1567,11 +1568,13 @@
                                         src="./assets/images/ic-copy-locate.svg"> 複製此處座標</a></li>
                             <li class="map-menu-item"><a href="#" class="map-menu-link"><img
                                         src="./assets/images/ic-owner-search.svg"> 地籍所有權人查詢</a></li>
-                            <li class="map-menu-item"><a href="#" class="map-menu-link"><img src="./assets/images/ic-flow.svg">
+                            <li class="map-menu-item"><a href="#" class="map-menu-link"><img
+                                        src="./assets/images/ic-flow.svg">
                                     渠道椿號查詢</a></li>
                             <li class="map-menu-item"><a href="#" class="map-menu-link"><img
                                         src="./assets/images/ic-land-check.svg"> 灌溉地普查</a></li>
-                            <li class="map-menu-item"><a href="#" class="map-menu-link"><img src="./assets/images/ic-land-mark.svg">
+                            <li class="map-menu-item"><a href="#" class="map-menu-link"><img
+                                        src="./assets/images/ic-land-mark.svg">
                                     土地標示</a></li>
                         </ul>
                     </div>
@@ -1579,14 +1582,16 @@
             </div>
 
             <div class="toast-container js-draggable" data-con="sum">
-                <div class="toast fade show fw-semibold w-100" role="alert">
+                <div class="toast fade fw-semibold w-100" role="alert" id="sumToast">
                     <div class="toast-header bg-secondary-color py-1">
-                        <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="toast"></button>
+                        <button type="button" class="btn-close btn-close-white ms-auto"
+                            data-bs-dismiss="toast"></button>
                     </div>
                     <div class="toast-body bg-white p-0" id="toast-body">
                         <div class="bg-tertiary-xlight-color d-flex align-items-center px-3 py-2">
                             <label for="length" class="flex-shrink-0 me-1" style="width: 60px;">長度單位</label>
-                            <select class="form-select form-select-sm me-3 me-sm-4 font-xs" id="length" style="width: 73px;">
+                            <select class="form-select form-select-sm me-3 me-sm-4 font-xs" id="length"
+                                style="width: 73px;">
                                 <option selected="">公尺</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
@@ -1601,12 +1606,14 @@
                             </select>
                         </div>
                         <div class="d-flex bg-tertiary-xlight-color px-3 pb-2">
-                            <button class="btn btn-dark-quaternary-light-color py-0 me-2 w-100" data-bs-toggle="collapse" data-bs-target="#todelete">
+                            <button class="btn btn-dark-quaternary-light-color py-0 me-2 w-100"
+                                data-bs-toggle="collapse" data-bs-target="#todelete">
                                 <img src="./assets/images/ic-ruler.svg" class="me-2">開始測量</button>
                             <button class="btn btn-dark-secondary-color px-2 py-0 flex-shrink-0 me-2">
                                 <img src="./assets/images/ic-trash-white.svg" style="width: 24px;">
                             </button>
-                            <button class="btn btn-dark-tertiary-color px-2 py-0 flex-shrink-0" data-bs-toggle="collapse" data-bs-target="#theinfo">
+                            <button class="btn btn-dark-tertiary-color px-2 py-0 flex-shrink-0"
+                                data-bs-toggle="collapse" data-bs-target="#theinfo">
                                 <img src="./assets/images/ic-info-white.svg" style="width: 24px;">
                             </button>
                         </div>
@@ -1632,22 +1639,30 @@
                                 </p>
                             </div>
                         </div>
-                        
-                        
+
+
                     </div>
-                    
+
                 </div>
             </div>
             <div class="map-content js-map-content">
                 <ul class="map-function js-map-function shadow-sm">
-                    <li class="map-function-item"><button class="btn map-function-btn"><img src="./assets/images/ic-swipe.svg" alt="icon"></button></li>
-                    <li class="map-function-item"><button class="btn map-function-btn"><img src="./assets/images/ic-locate-btn.svg" alt="icon"></button></li>
-                    <li class="map-function-item"><button class="btn map-function-btn"><img src="./assets/images/ic-poly.svg" alt="icon"></button></li>
-                    <li class="map-function-item"><button class="btn map-function-btn"><img src="./assets/images/ic-pentagon.svg" alt="icon"></button></li>
-                    <li class="map-function-item"><button class="btn map-function-btn"><img src="./assets/images/ic-rectangle.svg" alt="icon"></button></li>
-                    <li class="map-function-item"><button class="btn map-function-btn"><img src="./assets/images/ic-trash-btn.svg" alt="icon"></button></li>
-                    <li class="map-function-item"><button class="btn map-function-btn"><img src="./assets/images/ic-openinbrowser.svg" alt="icon"></button></li>
-                    <li class="map-function-item"><button class="btn map-function-btn"><img src="./assets/images/ic-download-btn.svg" alt="icon"></button></li>
+                    <li class="map-function-item"><button class="btn map-function-btn"><img
+                                src="./assets/images/ic-swipe.svg" alt="icon"></button></li>
+                    <li class="map-function-item"><button class="btn map-function-btn"><img
+                                src="./assets/images/ic-locate-btn.svg" alt="icon"></button></li>
+                    <li class="map-function-item"><button class="btn map-function-btn"><img
+                                src="./assets/images/ic-poly.svg" alt="icon"></button></li>
+                    <li class="map-function-item"><button class="btn map-function-btn"><img
+                                src="./assets/images/ic-pentagon.svg" alt="icon"></button></li>
+                    <li class="map-function-item"><button class="btn map-function-btn"><img
+                                src="./assets/images/ic-rectangle.svg" alt="icon"></button></li>
+                    <li class="map-function-item"><button class="btn map-function-btn"><img
+                                src="./assets/images/ic-trash-btn.svg" alt="icon"></button></li>
+                    <li class="map-function-item"><button class="btn map-function-btn"><img
+                                src="./assets/images/ic-openinbrowser.svg" alt="icon"></button></li>
+                    <li class="map-function-item"><button class="btn map-function-btn"><img
+                                src="./assets/images/ic-download-btn.svg" alt="icon"></button></li>
                 </ul>
                 <div class="map-dot" data-style="primary-dark" style="right: 50%; top: 50%;">2</div>
                 <div class="map-dot bg-white quaternary-color" data-style="quaternary" style="right: 10%; top: 20%;">2
@@ -1655,10 +1670,12 @@
                 <div class="map-dot bg-white primary-dark-color" data-style="primary-dark"
                     style="right: 30%; top: 40%;">2
                 </div>
-                <div class="map-content-inside js-map-inside" style="background: url('assets/images/map-demo.jpg'); background-size: cover;"></div>
+                <div class="map-content-inside js-map-inside"
+                    style="background: url('assets/images/map-demo.jpg'); background-size: cover;"></div>
             </div>
             <div class="map-compare js-map-content-compare">
-                <div class="map-content-inside js-map-inside" style="background: url('assets/images/map-demo1.jpg'); background-size: cover;"></div>
+                <div class="map-content-inside js-map-inside"
+                    style="background: url('assets/images/map-demo1.jpg'); background-size: cover;"></div>
             </div>
         </div>
 
@@ -1704,9 +1721,18 @@
         });
         observer.observe(document.querySelector('.js-map-content-wrapper'));
 
-        $('.js-map-inside-toggler').click(function(){
+        $('.js-map-inside-toggler').click(function () {
             $('.js-map-inside').toggleClass('full');
         })
+        //測量工具視窗
+        const toastTrigger = document.getElementById('sumToastBtn')
+        const toastLiveExample = document.getElementById('sumToast')
+        if (toastTrigger) {
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+            toastTrigger.addEventListener('click', () => {
+                toastBootstrap.show()
+            })
+        }
 
     });
 </script>
