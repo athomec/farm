@@ -15721,14 +15721,18 @@ footer .footer-logo {
     z-index: 200;
     position: absolute !important; }
     .map-content-wrapper .toast-container[data-con="sum"] {
+      width: 370px !important;
       right: 40px;
       bottom: 40px; }
       @media (max-width: 420px) {
         .map-content-wrapper .toast-container[data-con="sum"] {
-          width: 90%;
-          max-width: 370px;
-          bottom: 20px;
-          right: 5%; } }
+          width: 100% !important;
+          bottom: auto;
+          right: 0;
+          top: 0; } }
+      @media (max-width: 420px) {
+        .map-content-wrapper .toast-container[data-con="sum"] .toast {
+          font-size: 0.8rem !important; } }
 
 .map-content {
   width: 100%;

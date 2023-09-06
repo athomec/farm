@@ -1579,46 +1579,63 @@
             </div>
 
             <div class="toast-container js-draggable" data-con="sum">
-                <div class="toast fade show fw-semibold" role="alert" style="width: 370px;">
+                <div class="toast fade show fw-semibold w-100" role="alert">
                     <div class="toast-header bg-secondary-color py-1">
                         <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="toast"></button>
                     </div>
-                    <div class="toast-body bg-white p-3">
-                        <div class="d-flex mb-3">
-                            <button class="btn btn-dark-quaternary-light-color me-2 w-100"><img src="./assets/images/ic-ruler.svg" class="me-2">量測工具</button>
-                            <button class="btn btn-dark-tertiary-xlight-color py- px-2 flex-shrink-0"><img src="./assets/images/ic-trash-btn.svg" style="width: 24px;"></button>
+                    <div class="toast-body bg-white p-0" id="toast-body">
+                        <div class="bg-tertiary-xlight-color d-flex align-items-center px-3 py-2">
+                            <label for="length" class="flex-shrink-0 me-1" style="width: 60px;">長度單位</label>
+                            <select class="form-select form-select-sm me-3 me-sm-4 font-xs" id="length" style="width: 73px;">
+                                <option selected="">公尺</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                            <label for="area-unit" class="flex-shrink-0 me-1" style="width: 60px;">面積單位</label>
+                            <select class="form-select form-select-sm font-xs" id="area-unit">
+                                <option selected="">平方公尺</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
                         </div>
-                        <div class="bg-quaternary-xlight-color p-3 mb-3">
-                            <ul>
-                                <li><span class="quaternary-color me-3">距離</span>123456678.12 公尺</li>
-                                <li><span class="quaternary-color me-3">周長</span>123456678.12 公尺</li>
-                                <li><hr class="bg-quaternary-color my-2"></li>
-                                <li><span class="quaternary-color me-3">面積</span>97894561237892 平方公尺</li>
-                            </ul>
+                        <div class="d-flex bg-tertiary-xlight-color px-3 pb-2">
+                            <button class="btn btn-dark-quaternary-light-color py-0 me-2 w-100" data-bs-toggle="collapse" data-bs-target="#todelete">
+                                <img src="./assets/images/ic-ruler.svg" class="me-2">開始測量</button>
+                            <button class="btn btn-dark-secondary-color px-2 py-0 flex-shrink-0 me-2">
+                                <img src="./assets/images/ic-trash-white.svg" style="width: 24px;">
+                            </button>
+                            <button class="btn btn-dark-tertiary-color px-2 py-0 flex-shrink-0" data-bs-toggle="collapse" data-bs-target="#theinfo">
+                                <img src="./assets/images/ic-info-white.svg" style="width: 24px;">
+                            </button>
                         </div>
-                        <p>
-                            *於地圖上點出2點或2點以上位置，點2下結束選取<br>
-                            *測量結果請記得刪除<br>
-                            <span class="primary-dark-color">*灌溉地測量完畢請按「地圖出圖」將測量資料與
-                            截圖帶入表格中</span>
-                        </p>
+                        <div class="collapse" id="todelete" data-bs-parent="#toast-body">
+                            <div class="bg-white px-3 py-2">
+                                <ul>
+                                    <li><span class="quaternary-color me-3">距離</span>123456678.12 公尺</li>
+                                    <li><span class="quaternary-color me-3">周長</span>123456678.12 公尺</li>
+                                    <li>
+                                        <hr class="bg-quaternary-color my-1 my-md-2">
+                                    </li>
+                                    <li><span class="quaternary-color me-3">面積</span>97894561237892 平方公尺</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="collapse" id="theinfo" data-bs-parent="#toast-body">
+                            <div class="bg-white px-3 py-2">
+                                <p>
+                                    *於地圖上點出2點以上位置，點2下結束選取<br>
+                                    *測量結果請記得刪除<br>
+                                    <span class="primary-dark-color">*灌溉地測量完畢請按「地圖出圖」將測量資料與
+                                        截圖帶入表格中</span>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        
                     </div>
-                    <div class="bg-gray200 d-flex align-items-center px-3 py-2">
-                        <label for="length" class="flex-shrink-0 me-1" style="width: 60px;">長度單位</label>
-                        <select class="form-select form-select-sm me-3 me-sm-4 font-xs" id="length" style="width: 73px;">
-                            <option selected="">公尺</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                        <label for="area-unit" class="flex-shrink-0 me-1" style="width: 60px;">面積單位</label>
-                        <select class="form-select form-select-sm font-xs" id="area-unit">
-                            <option selected="">平方公尺</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                    </div>
+                    
                 </div>
             </div>
             <div class="map-content js-map-content">
