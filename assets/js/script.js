@@ -21,10 +21,15 @@ $(function () {//JS開頭
 		if ($(this).hasClass("collapsed")) {
 			window.parent.$(".js-side-info").addClass("smaller");
 			window.parent.$(".js-map-content-wrapper").addClass("bigger");
+			window.parent.$(".js-map-result-content").removeClass("smaller");
 		} else {
 			window.parent.$(".js-side-info").removeClass("smaller");
 			window.parent.$(".js-map-content-wrapper").removeClass("bigger");
+			window.parent.$(".js-map-result-content").addClass("smaller");
 		}
+	});
+	$(".js-side-info-mode-toggler[data-con='地圖輔助模式']").click(function () {
+		$(".js-map-result-content").addClass("smaller");
 	});
 	$(".js-side-info-search-full").click(function () {//底部視窗滿版
 		window.parent.$(".js-side-info").addClass("full");

@@ -15173,7 +15173,9 @@ iframe {
           -webkit-filter: invert(41%) sepia(99%) saturate(5935%) hue-rotate(189deg) brightness(91%) contrast(101%);
                   filter: invert(41%) sepia(99%) saturate(5935%) hue-rotate(189deg) brightness(91%) contrast(101%); }
   .map-result-content {
-    max-height: calc(100vh - 155px); }
+    max-height: calc(100vh - 191px); }
+    .map-result-content.smaller {
+      max-height: calc(100vh - 434px); }
   .map-result-noinfo {
     display: -webkit-box;
     display: -ms-flexbox;
