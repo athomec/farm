@@ -15173,9 +15173,15 @@ iframe {
           -webkit-filter: invert(41%) sepia(99%) saturate(5935%) hue-rotate(189deg) brightness(91%) contrast(101%);
                   filter: invert(41%) sepia(99%) saturate(5935%) hue-rotate(189deg) brightness(91%) contrast(101%); }
   .map-result-content {
-    max-height: calc(100vh - 191px); }
+    max-height: calc(100vh - 155px); }
+    @media (max-width: 1200px) {
+      .map-result-content {
+        max-height: calc(100vh - 140px); } }
     .map-result-content.smaller {
       max-height: calc(100vh - 434px); }
+      @media (max-width: 1200px) {
+        .map-result-content.smaller {
+          max-height: calc(100vh - 419px); } }
   .map-result-noinfo {
     display: -webkit-box;
     display: -ms-flexbox;

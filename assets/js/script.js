@@ -16,6 +16,7 @@ $(function () {//JS開頭
 		window.parent.$(content).addClass("open");
 		window.parent.$(".js-map-content-wrapper").removeClass("hide");
 		window.parent.$(content).css('height', '280px');
+		window.parent.$(".js-map-result-content").addClass("smaller");
 	})
 	$(".js-side-info-toggler").click(function () {//底部視窗收合
 		if ($(this).hasClass("collapsed")) {
